@@ -4,68 +4,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Chirag Khatri Portfolio - Dark Theme Design System */
+/* Chirag Khatri Portfolio - Modern Design System */
+/* Trendy warm palette with human feel */
 
 @layer base {
   :root {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 95%;
+    --background: 30 20% 98%;
+    --foreground: 30 10% 10%;
 
-    --card: 240 10% 6%;
-    --card-foreground: 0 0% 95%;
+    --card: 30 20% 96%;
+    --card-foreground: 30 10% 10%;
 
-    --popover: 240 10% 6%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 30 20% 96%;
+    --popover-foreground: 30 10% 10%;
 
-    --primary: 263 70% 58%;
+    --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 10% 12%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 30 15% 92%;
+    --secondary-foreground: 30 10% 25%;
 
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 55%;
+    --muted: 30 15% 88%;
+    --muted-foreground: 30 10% 45%;
 
-    --accent: 263 70% 58%;
+    --accent: 24 95% 53%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 10% 15%;
-    --input: 240 10% 15%;
-    --ring: 263 70% 58%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 24 95% 53%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --glow-primary: 263 70% 58%;
-    --glow-secondary: 220 70% 55%;
-    --surface-elevated: 240 10% 8%;
-    --text-gradient-start: 263 70% 65%;
-    --text-gradient-end: 220 70% 60%;
+    --glow-primary: 24 95% 53%;
+    --glow-secondary: 45 93% 58%;
+    --surface-elevated: 30 20% 99%;
+    --text-gradient-start: 24 95% 53%;
+    --text-gradient-end: 35 91% 45%;
   }
 
   .dark {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 95%;
-    --card: 240 10% 6%;
-    --card-foreground: 0 0% 95%;
-    --popover: 240 10% 6%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 263 70% 58%;
+    --background: 30 8% 7%;
+    --foreground: 30 10% 95%;
+
+    --card: 30 8% 10%;
+    --card-foreground: 30 10% 95%;
+
+    --popover: 30 8% 10%;
+    --popover-foreground: 30 10% 95%;
+
+    --primary: 24 95% 58%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 10% 12%;
-    --secondary-foreground: 0 0% 90%;
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 55%;
-    --accent: 263 70% 58%;
+
+    --secondary: 30 8% 14%;
+    --secondary-foreground: 30 10% 85%;
+
+    --muted: 30 8% 18%;
+    --muted-foreground: 30 8% 55%;
+
+    --accent: 24 95% 58%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
+
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 10% 15%;
-    --input: 240 10% 15%;
-    --ring: 263 70% 58%;
+
+    --border: 30 8% 18%;
+    --input: 30 8% 18%;
+    --ring: 24 95% 58%;
+
+    --glow-primary: 24 95% 58%;
+    --glow-secondary: 45 93% 58%;
+    --surface-elevated: 30 8% 12%;
+    --text-gradient-start: 24 95% 65%;
+    --text-gradient-end: 35 91% 55%;
   }
 }
 
@@ -81,13 +96,51 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
-    background-image: 
-      radial-gradient(ellipse at top, hsl(var(--primary) / 0.03) 0%, transparent 50%),
-      linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)));
+    cursor: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
     @apply bg-primary/30 text-foreground;
+  }
+
+  /* Custom cursor */
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  .cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid hsl(var(--primary) / 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  }
+
+  .cursor-outline.hover {
+    width: 60px;
+    height: 60px;
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary) / 0.1);
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+    .cursor-dot, .cursor-outline {
+      display: none;
+    }
   }
 }
 
@@ -136,6 +189,70 @@
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* Page transition */
+  .page-transition {
+    animation: pageEnter 0.6s ease-out;
+  }
+
+  /* Parallax container */
+  .parallax-section {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Magnetic button effect */
+  .magnetic-btn {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Noise texture overlay */
+  .noise-bg::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gradient orb */
+  .gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+
+  .gradient-orb-1 {
+    width: 500px;
+    height: 500px;
+    background: hsl(var(--primary) / 0.2);
+    top: -200px;
+    right: -100px;
+    animation-delay: 0s;
+  }
+
+  .gradient-orb-2 {
+    width: 400px;
+    height: 400px;
+    background: hsl(var(--glow-secondary) / 0.15);
+    bottom: -150px;
+    left: -100px;
+    animation-delay: -10s;
+  }
+
+  .gradient-orb-3 {
+    width: 300px;
+    height: 300px;
+    background: hsl(var(--primary) / 0.15);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -5s;
+  }
 }
 
 @layer utilities {
@@ -158,8 +275,8 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
 }
 
 @keyframes scrollBounce {
@@ -171,5 +288,31 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, -30px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 40px) scale(0.9);
+  }
+  75% {
+    transform: translate(-40px, -20px) scale(1.05);
   }
 }

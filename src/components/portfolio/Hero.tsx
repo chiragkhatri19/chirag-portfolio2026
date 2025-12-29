@@ -1,16 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
+import { useParallax } from "@/hooks/use-parallax";
 
 const Hero = () => {
+  const parallaxRef = useParallax(0.3);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] bg-primary/15 rounded-full blur-[150px] animate-pulse-glow" />
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] bg-glow-secondary/10 rounded-full blur-[100px]" />
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated gradient orbs */}
+      <div className="gradient-orb gradient-orb-1" />
+      <div className="gradient-orb gradient-orb-2" />
+      <div className="gradient-orb gradient-orb-3" />
       
-      <div className="container relative z-10 px-4 md:px-6">
-        <div className="flex flex-col items-center text-center space-y-8">
+      {/* Noise texture */}
+      <div className="noise-bg" />
+      
+      <div ref={parallaxRef} className="container relative z-10 px-4 md:px-6">
+        <div className="flex flex-col items-center text-center space-y-8 page-transition">
+          {/* Status badge */}
+          <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: "0s" }}>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm text-sm text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              Available for work
+            </span>
+          </div>
+
           {/* Main heading */}
           <div className="space-y-4 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
@@ -33,13 +47,13 @@ const Hero = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4 opacity-0 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
-            <Button variant="hero" size="lg" asChild>
+            <Button variant="hero" size="lg" asChild className="magnetic-btn">
               <a href="#contact">
                 <Mail className="w-5 h-5" />
                 Contact Me
               </a>
             </Button>
-            <Button variant="heroOutline" size="lg" asChild>
+            <Button variant="heroOutline" size="lg" asChild className="magnetic-btn">
               <a href="#projects">
                 View Projects
               </a>

@@ -7,6 +7,7 @@ import Projects from "@/components/portfolio/Projects";
 import Experience from "@/components/portfolio/Experience";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
+import CustomCursor from "@/components/portfolio/CustomCursor";
 
 const Index = () => {
   return (
@@ -37,7 +38,9 @@ const Index = () => {
         <link rel="canonical" href="https://chirag.dev" />
       </Helmet>
 
-      <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <CustomCursor />
+
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300">
         <Navbar />
         <main>
           <Hero />

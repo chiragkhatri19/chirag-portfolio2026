@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chirag Khatri | Full Stack Developer</title>
     <meta name="description" content="Chirag Khatri is a Full Stack Developer from India, building scalable web applications and clean user experiences with React, Node.js, and modern technologies." />
     <meta name="author" content="Chirag Khatri" />
-    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="theme-color" content="#f97316" />
 
     <meta property="og:title" content="Chirag Khatri | Full Stack Developer" />
     <meta property="og:description" content="Full Stack Developer focused on performance, simplicity, and real-world products." />
@@ -22,5 +22,10 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Apply theme before page loads to prevent flash
+      const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.classList.add(theme);
+    </script>
   </body>
 </html>
