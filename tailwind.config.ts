@@ -54,6 +54,7 @@ export default {
         glow: {
           primary: "hsl(var(--glow-primary))",
           secondary: "hsl(var(--glow-secondary))",
+          tertiary: "hsl(var(--glow-tertiary))",
         },
         surface: {
           elevated: "hsl(var(--surface-elevated))",
