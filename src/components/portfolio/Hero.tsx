@@ -35,6 +35,7 @@ const Hero = () => {
         {/* Glowing lines */}
         <div className="glow-line glow-line-1" />
         <div className="glow-line glow-line-2" />
+        <div className="glow-line glow-line-3" />
         
         {/* Floating particles */}
         <div className="particles">

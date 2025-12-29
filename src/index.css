@@ -4,86 +4,87 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Chirag Khatri Portfolio - Refined Blue/Teal Design System */
+/* Chirag Khatri Portfolio - Premium Design System */
+/* Sophisticated slate/emerald palette */
 
 @layer base {
   :root {
-    /* Light mode - Clean, airy with subtle blue undertones */
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Light mode - Warm, refined cream/sage tones */
+    --background: 40 33% 98%;
+    --foreground: 224 71% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 224 71% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 224 71% 4%;
 
-    --primary: 172 66% 40%;
+    --primary: 160 84% 39%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 94%;
-    --secondary-foreground: 222 47% 20%;
+    --secondary: 40 33% 94%;
+    --secondary-foreground: 224 71% 10%;
 
-    --muted: 210 40% 92%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 40 20% 91%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 172 66% 40%;
+    --accent: 160 84% 39%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 172 66% 40%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 160 84% 39%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --glow-primary: 172 66% 50%;
-    --glow-secondary: 199 89% 48%;
-    --glow-tertiary: 262 83% 58%;
+    --glow-primary: 160 84% 45%;
+    --glow-secondary: 190 95% 45%;
+    --glow-tertiary: 280 70% 55%;
     --surface-elevated: 0 0% 100%;
-    --text-gradient-start: 172 66% 40%;
-    --text-gradient-end: 199 89% 48%;
+    --text-gradient-start: 160 84% 39%;
+    --text-gradient-end: 190 95% 40%;
   }
 
   .dark {
-    /* Dark mode - Deep, rich with glowing accents */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Dark mode - Deep charcoal with emerald accents */
+    --background: 224 71% 4%;
+    --foreground: 40 33% 98%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 71% 6%;
+    --card-foreground: 40 33% 98%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 71% 6%;
+    --popover-foreground: 40 33% 98%;
 
-    --primary: 172 66% 50%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 160 84% 45%;
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 217 33% 14%;
-    --secondary-foreground: 210 40% 90%;
+    --secondary: 215 28% 12%;
+    --secondary-foreground: 40 33% 90%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 215 28% 15%;
+    --muted-foreground: 220 9% 58%;
 
-    --accent: 172 66% 50%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 160 84% 45%;
+    --accent-foreground: 224 71% 4%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 172 66% 50%;
+    --border: 215 28% 15%;
+    --input: 215 28% 15%;
+    --ring: 160 84% 45%;
 
-    --glow-primary: 172 66% 50%;
-    --glow-secondary: 199 89% 48%;
-    --glow-tertiary: 262 83% 58%;
-    --surface-elevated: 222 47% 11%;
-    --text-gradient-start: 172 66% 55%;
-    --text-gradient-end: 199 89% 55%;
+    --glow-primary: 160 84% 50%;
+    --glow-secondary: 190 95% 50%;
+    --glow-tertiary: 280 70% 60%;
+    --surface-elevated: 224 71% 8%;
+    --text-gradient-start: 160 84% 55%;
+    --text-gradient-end: 190 95% 50%;
   }
 }
 
@@ -217,99 +218,121 @@
     overflow: hidden;
   }
 
-  /* Animated mesh gradient */
+  /* Aurora-style animated gradient */
   .mesh-gradient {
     position: absolute;
-    inset: -50%;
+    inset: -100%;
     background: 
-      radial-gradient(ellipse 80% 50% at 20% 40%, hsl(var(--glow-primary) / 0.15), transparent 50%),
-      radial-gradient(ellipse 60% 60% at 80% 20%, hsl(var(--glow-secondary) / 0.12), transparent 50%),
-      radial-gradient(ellipse 50% 80% at 50% 80%, hsl(var(--glow-tertiary) / 0.08), transparent 50%);
-    animation: meshMove 25s ease-in-out infinite;
+      conic-gradient(from 0deg at 50% 50%, 
+        hsl(var(--glow-primary) / 0.15) 0deg,
+        hsl(var(--glow-secondary) / 0.1) 60deg,
+        hsl(var(--glow-tertiary) / 0.08) 120deg,
+        hsl(var(--glow-primary) / 0.12) 180deg,
+        hsl(var(--glow-secondary) / 0.1) 240deg,
+        hsl(var(--glow-tertiary) / 0.08) 300deg,
+        hsl(var(--glow-primary) / 0.15) 360deg
+      );
+    filter: blur(80px);
+    animation: auroraRotate 30s linear infinite;
   }
 
   .dark .mesh-gradient {
     background: 
-      radial-gradient(ellipse 80% 50% at 20% 40%, hsl(var(--glow-primary) / 0.25), transparent 50%),
-      radial-gradient(ellipse 60% 60% at 80% 20%, hsl(var(--glow-secondary) / 0.2), transparent 50%),
-      radial-gradient(ellipse 50% 80% at 50% 80%, hsl(var(--glow-tertiary) / 0.12), transparent 50%);
+      conic-gradient(from 0deg at 50% 50%, 
+        hsl(var(--glow-primary) / 0.3) 0deg,
+        hsl(var(--glow-secondary) / 0.2) 60deg,
+        hsl(var(--glow-tertiary) / 0.15) 120deg,
+        hsl(var(--glow-primary) / 0.25) 180deg,
+        hsl(var(--glow-secondary) / 0.2) 240deg,
+        hsl(var(--glow-tertiary) / 0.12) 300deg,
+        hsl(var(--glow-primary) / 0.3) 360deg
+      );
   }
 
-  /* Floating shapes */
+  /* Floating blob shapes with organic movement */
   .floating-shape {
     position: absolute;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    filter: blur(60px);
-    opacity: 0.5;
+    filter: blur(80px);
+    opacity: 0.6;
+    mix-blend-mode: normal;
   }
 
   .floating-shape-1 {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, hsl(var(--glow-primary) / 0.3), hsl(var(--glow-secondary) / 0.2));
-    top: -10%;
-    right: -5%;
-    animation: shapeFloat1 20s ease-in-out infinite;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at 30% 30%, hsl(var(--glow-primary) / 0.4), hsl(var(--glow-secondary) / 0.1));
+    top: -20%;
+    right: -15%;
+    animation: blobFloat1 25s ease-in-out infinite;
   }
 
   .floating-shape-2 {
-    width: 350px;
-    height: 350px;
-    background: linear-gradient(225deg, hsl(var(--glow-secondary) / 0.25), hsl(var(--glow-tertiary) / 0.15));
-    bottom: -5%;
-    left: -10%;
-    animation: shapeFloat2 25s ease-in-out infinite;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at 70% 70%, hsl(var(--glow-secondary) / 0.35), hsl(var(--glow-tertiary) / 0.1));
+    bottom: -15%;
+    left: -15%;
+    animation: blobFloat2 30s ease-in-out infinite;
   }
 
   .floating-shape-3 {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(45deg, hsl(var(--glow-tertiary) / 0.2), hsl(var(--glow-primary) / 0.15));
-    top: 40%;
-    left: 50%;
-    animation: shapeFloat3 18s ease-in-out infinite;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at 50% 50%, hsl(var(--glow-tertiary) / 0.25), transparent);
+    top: 30%;
+    left: 40%;
+    animation: blobFloat3 20s ease-in-out infinite;
   }
 
-  /* Grid pattern overlay */
+  .dark .floating-shape {
+    opacity: 0.8;
+  }
+
+  /* Dotted grid pattern */
   .grid-pattern {
     position: absolute;
     inset: 0;
-    background-image: 
-      linear-gradient(hsl(var(--foreground) / 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--foreground) / 0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 70%);
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.05) 1px, transparent 0);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, black 10%, transparent 70%);
   }
 
   .dark .grid-pattern {
-    background-image: 
-      linear-gradient(hsl(var(--foreground) / 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--foreground) / 0.03) 1px, transparent 1px);
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.08) 1px, transparent 0);
   }
 
-  /* Glow line */
+  /* Animated gradient lines */
   .glow-line {
     position: absolute;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
-    animation: lineGlow 4s ease-in-out infinite;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.6), hsl(var(--glow-secondary) / 0.4), transparent);
+    animation: lineTravel 8s ease-in-out infinite;
+    filter: blur(1px);
   }
 
   .glow-line-1 {
-    width: 60%;
-    top: 30%;
-    left: 20%;
+    width: 70%;
+    top: 25%;
+    left: -10%;
     animation-delay: 0s;
   }
 
   .glow-line-2 {
-    width: 40%;
-    top: 60%;
-    left: 35%;
+    width: 50%;
+    top: 55%;
+    left: 30%;
+    animation-delay: 4s;
+  }
+
+  .glow-line-3 {
+    width: 60%;
+    top: 75%;
+    left: -5%;
     animation-delay: 2s;
   }
 
-  /* Particle dots */
+  /* Sparkle particles */
   .particles {
     position: absolute;
     inset: 0;
@@ -318,30 +341,30 @@
 
   .particle {
     position: absolute;
-    width: 3px;
-    height: 3px;
-    background: hsl(var(--primary) / 0.4);
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--primary) / 0.5);
     border-radius: 50%;
-    animation: particleFloat 15s linear infinite;
+    animation: sparkleFloat 20s linear infinite;
   }
 
   .dark .particle {
-    background: hsl(var(--primary) / 0.6);
-    box-shadow: 0 0 6px hsl(var(--primary) / 0.4);
+    background: hsl(var(--primary) / 0.8);
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
   }
 
-  /* Noise texture overlay - more subtle */
+  /* Subtle noise texture */
   .noise-overlay {
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
     pointer-events: none;
     z-index: 1;
   }
 
   .dark .noise-overlay {
-    opacity: 0.025;
+    opacity: 0.03;
   }
 }
 
@@ -392,88 +415,108 @@
   }
 }
 
-@keyframes meshMove {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
+@keyframes auroraRotate {
+  0% {
+    transform: rotate(0deg) scale(1.5);
   }
-  25% {
-    transform: translate(3%, -3%) rotate(2deg);
-  }
-  50% {
-    transform: translate(-2%, 2%) rotate(-1deg);
-  }
-  75% {
-    transform: translate(1%, -1%) rotate(1deg);
+  100% {
+    transform: rotate(360deg) scale(1.5);
   }
 }
 
-@keyframes shapeFloat1 {
+@keyframes blobFloat1 {
   0%, 100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
+    transform: translate(0, 0) scale(1);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
-  25% {
-    transform: translate(-30px, 40px) rotate(10deg) scale(1.05);
+  20% {
+    transform: translate(-40px, 60px) scale(1.1);
     border-radius: 50% 50% 30% 70% / 40% 60% 40% 60%;
   }
-  50% {
-    transform: translate(20px, -20px) rotate(-5deg) scale(0.95);
+  40% {
+    transform: translate(30px, -30px) scale(0.95);
     border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
   }
-  75% {
-    transform: translate(-10px, -30px) rotate(5deg) scale(1.02);
+  60% {
+    transform: translate(-20px, -50px) scale(1.05);
     border-radius: 60% 40% 50% 50% / 30% 70% 30% 70%;
   }
+  80% {
+    transform: translate(50px, 20px) scale(0.98);
+    border-radius: 35% 65% 55% 45% / 45% 35% 65% 55%;
+  }
 }
 
-@keyframes shapeFloat2 {
+@keyframes blobFloat2 {
   0%, 100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
+    transform: translate(0, 0) scale(1);
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
-  33% {
-    transform: translate(40px, -30px) rotate(-15deg) scale(1.08);
+  25% {
+    transform: translate(50px, -40px) scale(1.08);
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
-  66% {
-    transform: translate(-20px, 30px) rotate(10deg) scale(0.92);
+  50% {
+    transform: translate(-30px, 50px) scale(0.92);
     border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
   }
+  75% {
+    transform: translate(40px, 30px) scale(1.03);
+    border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%;
+  }
 }
 
-@keyframes shapeFloat3 {
+@keyframes blobFloat3 {
   0%, 100% {
-    transform: translate(-50%, 0) rotate(0deg);
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
   }
-  50% {
-    transform: translate(-50%, -40px) rotate(180deg);
+  33% {
+    transform: translate(-60px, 40px) scale(1.15);
+    opacity: 0.8;
   }
-}
-
-@keyframes lineGlow {
-  0%, 100% {
-    opacity: 0;
-    transform: scaleX(0.5);
-  }
-  50% {
-    opacity: 1;
-    transform: scaleX(1);
+  66% {
+    transform: translate(40px, -30px) scale(0.9);
+    opacity: 0.5;
   }
 }
 
-@keyframes particleFloat {
+@keyframes lineTravel {
   0% {
-    transform: translateY(100vh) translateX(0);
+    transform: translateX(-100%) scaleX(0.5);
     opacity: 0;
   }
-  10% {
+  20% {
     opacity: 1;
   }
-  90% {
+  80% {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100vh) translateX(50px);
+    transform: translateX(100%) scaleX(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  5% {
+    transform: translateY(90vh) translateX(10px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(-20px) scale(0.8);
+    opacity: 0.8;
+  }
+  95% {
+    transform: translateY(10vh) translateX(30px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(40px) scale(0);
     opacity: 0;
   }
 }

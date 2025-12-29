@@ -6,7 +6,7 @@
     <title>Chirag Khatri | Full Stack Developer</title>
     <meta name="description" content="Chirag Khatri is a Full Stack Developer from India, building scalable web applications and clean user experiences with React, Node.js, and modern technologies." />
     <meta name="author" content="Chirag Khatri" />
-    <meta name="theme-color" content="#14b8a6" />
+    <meta name="theme-color" content="#059669" />
 
     <meta property="og:title" content="Chirag Khatri | Full Stack Developer" />
     <meta property="og:description" content="Full Stack Developer focused on performance, simplicity, and real-world products." />
@@ -24,8 +24,17 @@
     <script type="module" src="/src/main.tsx"></script>
     <script>
       // Apply theme before page loads to prevent flash
-      const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.classList.add(theme);
+      (function() {
+        const storedMode = localStorage.getItem('theme-mode');
+        let theme;
+        if (storedMode === 'dark' || storedMode === 'light') {
+          theme = storedMode;
+        } else {
+          // System or no preference - use system setting
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.classList.add(theme);
+      })();
     </script>
   </body>
 </html>
