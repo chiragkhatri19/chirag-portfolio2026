@@ -1,15 +1,32 @@
 import { Helmet } from "react-helmet-async";
+import { lazy, Suspense, memo } from "react";
 import Navbar from "@/components/portfolio/Navbar";
 import Hero from "@/components/portfolio/Hero";
-import About from "@/components/portfolio/About";
-import Skills from "@/components/portfolio/Skills";
-import Projects from "@/components/portfolio/Projects";
-import Experience from "@/components/portfolio/Experience";
-import Contact from "@/components/portfolio/Contact";
-import Footer from "@/components/portfolio/Footer";
 import CustomCursor from "@/components/portfolio/CustomCursor";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Index = () => {
+// Lazy load below-the-fold sections for faster initial paint
+const About = lazy(() => import("@/components/portfolio/About"));
+const Skills = lazy(() => import("@/components/portfolio/Skills"));
+const Projects = lazy(() => import("@/components/portfolio/Projects"));
+const Experience = lazy(() => import("@/components/portfolio/Experience"));
+const Contact = lazy(() => import("@/components/portfolio/Contact"));
+const Footer = lazy(() => import("@/components/portfolio/Footer"));
+
+// Minimal loading fallback that doesn't cause layout shift
+const SectionFallback = memo(() => (
+  <div className="min-h-[50vh] flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+  </div>
+));
+
+SectionFallback.displayName = 'SectionFallback';
+
+const Index = memo(() => {
+  // Initialize smooth scrolling
+  useSmoothScroll();
+
   return (
     <>
       <Helmet>
@@ -40,20 +57,42 @@ const Index = () => {
 
       <CustomCursor />
 
-      <div className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Navbar />
+          <main>
+            <Hero />
+            <Suspense fallback={<SectionFallback />}>
+              <About />
+            </Suspense>
+            <Suspense fallback={<SectionFallback />}>
+              <Skills />
+            </Suspense>
+            <Suspense fallback={<SectionFallback />}>
+              <Projects />
+            </Suspense>
+            <Suspense fallback={<SectionFallback />}>
+              <Experience />
+            </Suspense>
+            <Suspense fallback={<SectionFallback />}>
+              <Contact />
+            </Suspense>
+          </main>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
-};
+});
+
+Index.displayName = 'Index';
 
 export default Index;
