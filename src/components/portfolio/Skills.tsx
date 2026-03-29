@@ -1,186 +1,139 @@
-import { Code2, Server, Database, Wrench, Palette } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FadeInWhenVisible, StaggerChildren, StaggerItem } from "@/components/ui/motion-effects";
-import { SpotlightCard } from "@/components/ui/spotlight";
-import { useRef, useMemo, memo } from "react";
+import { memo } from "react";
+import {
+  SiTypescript, SiJavascript, SiPython, SiReact, SiNextdotjs,
+  SiNodedotjs, SiTailwindcss, SiGit,
+  SiDocker, SiPostgresql, SiMongodb,
+  SiSupabase, SiFirebase, SiVercel,
+  SiOpenjdk, SiExpress, SiGraphql, SiPrisma, SiFramer,
+  SiRedux, SiFigma, SiGithub,
+  SiVite, SiTurborepo,
+  SiFastapi, SiFastify, SiBun, SiHono, SiClerk, SiRadixui, SiShadcnui,
+  SiPosthog, SiAppwrite, SiLinux, SiDavinciresolve, SiArchlinux
+} from "react-icons/si";
+import { type IconType } from "react-icons";
+import { motion } from "framer-motion";
 
-// Static data moved outside component
-const SKILL_CATEGORIES = [
-  {
-    title: "Frontend",
-    icon: Code2,
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Framer Motion", "Redux"],
-  },
-  {
-    title: "Backend",
-    icon: Server,
-    skills: ["Node.js", "Express.js", "REST APIs", "GraphQL", "Supabase", "Firebase", "Prisma", "JWT Auth"],
-  },
-  {
-    title: "Database",
-    icon: Database,
-    skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Supabase DB"],
-  },
-  {
-    title: "Tools & DevOps",
-    icon: Wrench,
-    skills: ["Git & GitHub", "Linux", "Docker", "Vercel", "Netlify", "AWS", "CI/CD", "Nginx"],
-  },
-  {
-    title: "Design & UI/UX",
-    icon: Palette,
-    skills: ["Figma", "Adobe Photoshop", "Adobe Illustrator", "UI/UX Design", "Responsive Design", "Prototyping"],
-  },
-] as const;
+// Custom Adobe icon components
+const AdobePr = ({ size = 52, style }: { size?: number; style?: React.CSSProperties }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={style}>
+    <rect width="48" height="48" rx="8" fill="#00005B"/>
+    <text x="24" y="31" textAnchor="middle" fill="#9999FF" fontSize="18" fontWeight="800" fontFamily="sans-serif">Pr</text>
+  </svg>
+);
 
-const TAGS = ["Performance-focused", "Clean Architecture", "Problem Solver", "Agile Methodology"] as const;
+const AdobeAe = ({ size = 52, style }: { size?: number; style?: React.CSSProperties }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={style}>
+    <rect width="48" height="48" rx="8" fill="#00005B"/>
+    <text x="24" y="31" textAnchor="middle" fill="#9999FF" fontSize="18" fontWeight="800" fontFamily="sans-serif">Ae</text>
+  </svg>
+);
 
-// Seeded random for deterministic values
-const seededRandom = (seed: number, i: number) => 
-  ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
+const AdobePs = ({ size = 52, style }: { size?: number; style?: React.CSSProperties }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={style}>
+    <rect width="48" height="48" rx="8" fill="#001E36"/>
+    <text x="24" y="31" textAnchor="middle" fill="#31A8FF" fontSize="18" fontWeight="800" fontFamily="sans-serif">Ps</text>
+  </svg>
+);
+
+type TechItem = {
+  icon: IconType | React.FC<{ size?: number; style?: React.CSSProperties }>;
+  name: string;
+  color: string;
+};
+
+const TECH_STACK: TechItem[] = [
+  // Core Languages
+  { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  { icon: SiPython, name: "Python", color: "#3776AB" },
+  { icon: SiOpenjdk, name: "Java", color: "#ED8B00" },
+  // Primary Frameworks
+  { icon: SiReact, name: "React", color: "#61DAFB" },
+  { icon: SiNextdotjs, name: "Next.js", color: "#FFFFFF" },
+  { icon: SiNodedotjs, name: "Node.js", color: "#339933" },
+  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+  { icon: SiExpress, name: "Express", color: "#FFFFFF" },
+  { icon: SiFastapi, name: "FastAPI", color: "#05998B" },
+  { icon: SiFastify, name: "Fastify", color: "#FFFFFF" },
+  { icon: SiHono, name: "Hono", color: "#FF5F00" },
+  { icon: SiBun, name: "Bun", color: "#FBF0DF" },
+  // UI & State
+  { icon: SiRedux, name: "Redux", color: "#764ABC" },
+  { icon: SiShadcnui, name: "Shadcn/ui", color: "#FFFFFF" },
+  { icon: SiRadixui, name: "Radix UI", color: "#FFFFFF" },
+  { icon: SiFramer, name: "Framer", color: "#0055FF" },
+  { icon: SiClerk, name: "Clerk", color: "#6C47FF" },
+  // Databases & Backend Services
+  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
+  { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
+  { icon: SiPrisma, name: "Prisma", color: "#2D3748" },
+  { icon: SiSupabase, name: "Supabase", color: "#3ECF8E" },
+  { icon: SiFirebase, name: "Firebase", color: "#FFCA28" },
+  { icon: SiAppwrite, name: "Appwrite", color: "#FD366E" },
+  { icon: SiGraphql, name: "GraphQL", color: "#E10098" },
+  // Design & Creative
+  { icon: SiFigma, name: "Figma", color: "#F24E1E" },
+  { icon: AdobePr, name: "Premiere Pro", color: "#9999FF" },
+  { icon: AdobeAe, name: "After Effects", color: "#9999FF" },
+  { icon: AdobePs, name: "Photoshop", color: "#31A8FF" },
+  { icon: SiDavinciresolve, name: "DaVinci", color: "#E34427" },
+  // DevOps & Tooling
+  { icon: SiGit, name: "Git", color: "#F05032" },
+  { icon: SiGithub, name: "GitHub", color: "#FFFFFF" },
+  { icon: SiDocker, name: "Docker", color: "#2496ED" },
+  { icon: SiVercel, name: "Vercel", color: "#FFFFFF" },
+  { icon: SiArchlinux, name: "Arch Linux", color: "#1793D1" },
+  { icon: SiVite, name: "Vite", color: "#646CFF" },
+  { icon: SiTurborepo, name: "Turborepo", color: "#EF4444" },
+  { icon: SiPosthog, name: "PostHog", color: "#FBBF24" },
+  { icon: SiLinux, name: "Linux", color: "#FCC624" },
+];
 
 const Skills = memo(() => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  
-  // Floating particles - deterministic
-  const floatingOrbs = useMemo(() => {
-    const seed = 88;
-    return Array.from({ length: 5 }, (_, i) => ({
-      id: i,
-      left: `${15 + seededRandom(seed, i) * 70}%`,
-      top: `${10 + seededRandom(seed, i + 10) * 80}%`,
-      size: 60 + seededRandom(seed, i + 20) * 100,
-      delay: seededRandom(seed, i + 30) * 5,
-      duration: 15 + seededRandom(seed, i + 40) * 10,
-    }));
-  }, []);
-
   return (
-    <section
-      id="skills"
-      ref={sectionRef}
-      className="py-16 sm:py-20 md:py-32 relative bg-secondary/30 dark:bg-card/50 overflow-hidden"
-    >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        {floatingOrbs.map((orb) => (
-          <motion.div
-            key={orb.id}
-            className="absolute rounded-full bg-gradient-to-br from-primary/10 to-glow-secondary/5 blur-3xl"
-            style={{
-              left: orb.left,
-              top: orb.top,
-              width: orb.size,
-              height: orb.size,
-              y: bgY,
-            }}
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -40, 20, 0],
-              scale: [1, 1.1, 0.9, 1],
-            }}
-            transition={{
-              duration: orb.duration,
-              delay: orb.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--muted-foreground)/0.06)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_40%,transparent_100%)]" />
-      </div>
-      <div className="container px-5 sm:px-6 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <FadeInWhenVisible>
-            <h2 className="text-base md:text-lg font-mono text-primary mb-6 tracking-wider uppercase">
-              Skills & Tools
-            </h2>
-          </FadeInWhenVisible>
-          
-          <FadeInWhenVisible delay={0.1}>
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              Technologies I{" "}
-              <span className="text-gradient">Work With</span>
-            </h3>
-          </FadeInWhenVisible>
-          
-          <FadeInWhenVisible delay={0.2}>
-            <p className="text-muted-foreground text-lg sm:text-xl md:text-2xl mb-10 sm:mb-12 md:mb-16 max-w-3xl">
-              I use the latest tools and technologies to build functional and scalable products.
-            </p>
-          </FadeInWhenVisible>
-          
-          {/* Skill Cards Grid */}
-          <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8" staggerDelay={0.1}>
-            {SKILL_CATEGORIES.map((category, index) => {
-              const Icon = category.icon;
-              return (
-                <StaggerItem key={category.title}>
-                  <SpotlightCard className="h-full p-5 sm:p-6 md:p-8">
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                        <motion.div
-                          className="p-2 sm:p-3 rounded-xl bg-primary/10 text-primary"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                        >
-                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-                        </motion.div>
-                        <h4 className="font-semibold text-lg sm:text-xl md:text-2xl">{category.title}</h4>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 sm:gap-3">
-                        {(category.skills as unknown as string[]).map((skill, skillIndex) => (
-                          <motion.span
-                            key={skill}
-                            className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base bg-secondary/80 text-secondary-foreground rounded-lg border border-border hover:border-primary/30 hover:bg-secondary transition-all duration-200"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 + index * 0.1 + skillIndex * 0.05 }}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                          >
-                            {skill}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  </SpotlightCard>
-                </StaggerItem>
-              );
-            })}
-          </StaggerChildren>
-          
-          {/* Tags */}
-          <FadeInWhenVisible delay={0.5}>
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 mt-10 sm:mt-12 md:mt-16">
-              {TAGS.map((tag, index) => (
-                <motion.span
-                  key={tag}
-                  className="px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base md:text-lg font-medium text-primary border border-primary/30 rounded-full bg-primary/5"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 + index * 0.1 }}
-                  whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
-                >
-                  {tag}
-                </motion.span>
-              ))}
-            </div>
-          </FadeInWhenVisible>
+    <section id="stack" className="bg-transparent py-24 relative">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-[60px]">
+        {/* Simplified Header */}
+        <div className="flex flex-col mb-16">
+          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-tight uppercase">
+            STACK
+          </h2>
+          <div className="h-1 w-12 bg-[#ea580c] mt-4" />
         </div>
+
+        {/* Left-Aligned Bolder Tech Stack with Larger Icons */}
+        <div className="grid grid-cols-5 gap-y-6 md:flex md:flex-wrap md:items-center md:justify-start md:gap-x-1 md:gap-y-6">
+          {TECH_STACK.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: idx * 0.005, duration: 0.2 }}
+                whileHover={{ scale: 1.25 }}
+                className="group relative cursor-pointer px-1 md:px-3 flex flex-col items-center"
+              >
+                <Icon 
+                  size={52} 
+                  style={{ color: item.color }} 
+                  className="drop-shadow-[0_0_12px_rgba(0,0,0,0.6)] opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <span className="absolute -bottom-8 text-[9px] font-space-mono text-zinc-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
+                  {item.name}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Subtle Footer Divider */}
+        <div className="mt-32 w-full h-[1px] bg-white/[0.03]" />
       </div>
     </section>
   );
 });
 
-Skills.displayName = 'Skills';
+Skills.displayName = "Skills";
 
 export default Skills;

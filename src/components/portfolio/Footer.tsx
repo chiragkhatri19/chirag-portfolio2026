@@ -1,88 +1,64 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
-import { motion } from "framer-motion";
-import { FadeInWhenVisible } from "@/components/ui/motion-effects";
+import { Github, Linkedin, Mail, Twitter, ArrowUpRight } from "lucide-react";
 import { memo, useMemo } from "react";
 
-// Static data moved outside component
 const SOCIAL_LINKS = [
-  { href: "https://github.com/chiragkhatri19", icon: Github, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/chiragk19/", icon: Linkedin, label: "LinkedIn" },
-  { href: "mailto:chirag@example.com", icon: Mail, label: "Email" },
+  { href: "https://github.com/chiragkhatri19", label: "GitHub" },
+  { href: "https://x.com/chiragx19", label: "X" },
+  { href: "https://www.linkedin.com/in/chiragk19/", label: "LinkedIn" },
+  { href: "mailto:chiragkhatri19@gmail.com", label: "Email" },
 ] as const;
 
 const Footer = memo(() => {
-  // Memoize year calculation to prevent recreation
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <FadeInWhenVisible>
-      <footer className="py-8 sm:py-10 md:py-12 border-t border-primary/10 dark:border-border bg-secondary/20 dark:bg-card/50">
-        <div className="container px-5 sm:px-6 md:px-6">
-          <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
-            {/* Left side */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="font-semibold text-sm sm:text-base mb-1">
-                <span className="text-gradient">Chirag</span> Khatri
-              </div>
-              <div className="text-xs sm:text-sm text-muted-foreground flex items-center justify-center gap-1">
-                🇮🇳 Based in India
-              </div>
-            </motion.div>
-
-            {/* Social Links */}
-            <div className="flex items-center gap-3 sm:gap-4 order-first md:order-none">
-              {SOCIAL_LINKS.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="p-2.5 sm:p-2 text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={social.label}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + index * 0.1, type: "spring", stiffness: 200 }}
-                  whileHover={{ scale: 1.2, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <social.icon className="w-5 h-5 sm:w-5 sm:h-5" />
-                </motion.a>
-              ))}
+    <footer className="pt-20 pb-12 bg-transparent relative">
+      {/* Top divider */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-[60px]">
+        <div className="w-full h-[1px] bg-white/5 mb-16" />
+        
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="text-3xl font-black font-outfit">
+                <span className="text-[#ea580c]">c</span>
+                <span className="text-white/40">.dev</span>
+              </span>
             </div>
+            <p className="font-outfit text-sm text-zinc-500 max-w-[280px] leading-relaxed">
+              building things that solve real problems. based in india, working globally.
+            </p>
+          </div>
 
-            {/* Right side */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="text-xs sm:text-sm text-muted-foreground">
-                © {currentYear} Chirag Khatri. All rights reserved.
-              </div>
-              <div className="text-[10px] sm:text-xs text-muted-foreground/60 mt-1 flex items-center justify-center gap-1">
-                Built with{" "}
-                <motion.span
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-                >
-                  <Heart className="w-3 h-3 text-primary" />
-                </motion.span>
-                {" "}using React & Tailwind
-              </div>
-            </motion.div>
+          {/* Links */}
+          <div className="flex gap-8 md:gap-10">
+            {SOCIAL_LINKS.map((social) => (
+              <a 
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1 font-space-mono text-[11px] text-zinc-500 uppercase tracking-widest hover:text-white transition-colors duration-300"
+              >
+                {social.label}
+                <ArrowUpRight size={10} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            ))}
           </div>
         </div>
-      </footer>
-    </FadeInWhenVisible>
+
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-space-mono text-[10px] text-zinc-700 uppercase tracking-[0.2em]">
+            © {currentYear} Chirag Khatri. All rights reserved.
+          </p>
+          <p className="font-space-mono text-[10px] text-zinc-800 uppercase tracking-widest">
+            React · Tailwind · Framer Motion
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 });
 

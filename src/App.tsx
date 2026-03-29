@@ -1,34 +1,52 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import { ThemeProvider } from "@/hooks/use-theme";
-import Index from "./pages/Index";
-import ProjectsPage from "./pages/ProjectsPage";
-import NotFound from "./pages/NotFound";
+import { memo } from "react";
 
-const queryClient = new QueryClient();
+import ApplePillNavbar from "./components/portfolio/ApplePillNavbar";
+import Hero from "./components/portfolio/Hero";
+import Skills from "./components/portfolio/Skills";
+import Projects from "./components/portfolio/Projects";
+import Experience from "./components/portfolio/Experience";
+import SocialSections from "./components/portfolio/SocialSections";
+import Contact from "./components/portfolio/Contact";
+import Footer from "./components/portfolio/Footer";
+import { ThemeProvider } from "./hooks/use-theme";
+import { BrowserRouter } from "react-router-dom";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
+function App() {
+  return (
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+        <ApplePillNavbar />
+        <main style={{
+          background: "var(--background-gradient)",
+          backgroundColor: "var(--bg)",
+          position: "relative",
+          minHeight: "100vh",
+          overflow: "hidden"
+        }}>
+          {/* Fine Noise Overlay */}
+          <div style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+            zIndex: 999,
+            opacity: 0.03,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }} />
+
+          <Hero />
+          <Skills />
+          <Projects />
+          <Experience />
+          <SocialSections />
+          <Contact />
+          <Footer />
+        </main>
       </ThemeProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
-);
+    </BrowserRouter>
+  );
+}
 
 export default App;

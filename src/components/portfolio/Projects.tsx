@@ -1,10 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FadeInWhenVisible } from "@/components/ui/motion-effects";
-import { useRef, useMemo, memo } from "react";
-import { Link } from "react-router-dom";
-import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
+import { memo } from "react";
+
 
 export type Project = {
   id: string;
@@ -83,23 +80,23 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "vyse",
-    title: "Vyse",
-    description: "A React Native social media app for AI-generated content, connecting users through creative and personalized content experiences.",
-    longDescription: "Vyse is an innovative social media platform built with React Native that focuses on AI-generated content. The app allows users to create, share, and discover personalized content powered by artificial intelligence. With advanced recommendation algorithms, users receive tailored content feeds that match their interests and preferences. The platform includes features like AI content creation tools, social sharing, real-time notifications, and personalized user profiles.",
-    tech: ["React Native", "TypeScript", "AI Integration", "Firebase", "Node.js"],
-    link: "#",
-    github: "#",
-    image: "/project-section/vysecover.png",
-    year: "2025",
-    role: "Full Stack Developer",
+    id: "glos-io",
+    title: "GLOS.io",
+    description: "A UI-context-aware localization tool that eliminates 'blind' AI translations by mapping strings directly to their visual UI components.",
+    longDescription: "GLOS (Give your i18n pipeline eyes) is a developer tool designed to fix the lack of visual context in automated translation workflows. It uses a headless browser (Playwright) to capture screenshots of every route in an application and employs a Vision LLM to extract visual context for every string. By generating a context-mapped registry, it ensures that AI translations understand whether a word like 'Cancel' is an action button or a status label, significantly increasing translation accuracy and tone consistency.",
+    tech: ["TypeScript", "Next.js", "Playwright", "Vision LLM", "Turbo", "Lingo.dev"],
+    link: "https://glos.io",
+    github: "https://github.com/chiragkhatri19/GLOS",
+    image: "/project-section/glos.io.png",
+    year: "2026",
+    role: "Lead Developer & Creator",
     features: [
-      "AI-powered content generation",
-      "Personalized content feeds",
-      "Social sharing and interaction",
-      "Real-time notifications",
-      "User profile customization",
-      "Cross-platform mobile experience",
+      "Automated route capture with Playwright",
+      "AI-powered UI hierarchy analysis",
+      "Context-mapped registry generation",
+      "Translation quality reporting CLI",
+      "Visual dashboard for string management",
+      "Monorepo architecture with Turborepo",
     ],
   },
 ];
@@ -112,7 +109,7 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
       <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed">
         {project.longDescription}
       </p>
-      
+
       {/* Tech Stack */}
       <div>
         <h4 className="text-white/60 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Technologies</h4>
@@ -128,14 +125,14 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
           ))}
         </div>
       </div>
-      
+
       {/* Features */}
       <div>
         <h4 className="text-white/60 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Key Features</h4>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           {project.features.map((feature, index) => (
-            <motion.li 
-              key={index} 
+            <motion.li
+              key={index}
               className="flex items-start gap-2 sm:gap-3 text-white/70 text-sm sm:text-base"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -147,7 +144,7 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
           ))}
         </ul>
       </div>
-      
+
       {/* Links */}
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
         <motion.a
@@ -179,126 +176,103 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
 
 ProjectContent.displayName = 'ProjectContent';
 
-// Seeded random for deterministic values
-const seededRandom = (seed: number, i: number) => 
-  ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
-
 const Projects = memo(() => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-  // Animated floating particles - deterministic
-  const projectParticles = useMemo(() => {
-    const seed = 66;
-    return Array.from({ length: 10 }, (_, i) => ({
-      id: i,
-      left: `${seededRandom(seed, i) * 100}%`,
-      top: `${seededRandom(seed, i + 100) * 100}%`,
-      size: 3 + seededRandom(seed, i + 200) * 6,
-      delay: seededRandom(seed, i + 300) * 8,
-      duration: 10 + seededRandom(seed, i + 400) * 10,
-    }));
-  }, []);
-
-  // Create cards for the carousel
-  const cards = projects.map((project, index) => (
-    <Card
-      key={project.id}
-      card={{
-        src: project.image || "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069&auto=format&fit=crop",
-        title: project.title,
-        category: project.role,
-        content: <ProjectContent project={project} />,
-      }}
-      index={index}
-    />
-  ));
-
   return (
     <section
       id="projects"
-      ref={sectionRef}
-      className="py-16 sm:py-20 md:py-32 relative overflow-hidden"
+      className="py-32 relative bg-transparent overflow-hidden"
     >
-      {/* Enhanced animated background */}
-      <div className="absolute inset-0 -z-10">
-        {/* Large gradient blobs */}
-        <motion.div
-          className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"
-          style={{ y: bgY }}
-          animate={{ scale: [1, 1.1, 1], x: [0, 20, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-glow-secondary/5 rounded-full blur-3xl"
-          style={{ y: bgY }}
-          animate={{ scale: [1, 1.15, 1], x: [0, -30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        
-        {/* Floating particles */}
-        {projectParticles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-primary/20"
-            style={{
-              left: particle.left,
-              top: particle.top,
-              width: particle.size,
-              height: particle.size,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 15, -10, 0],
-              opacity: [0.2, 0.6, 0.2],
-            }}
-            transition={{
-              duration: particle.duration,
-              delay: particle.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        backgroundImage: `
+          linear-gradient(to right, rgba(80, 80, 90, 0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(80, 80, 90, 0.08) 1px, transparent 1px)
+        `,
+        backgroundSize: "80px 80px",
+        maskImage: "radial-gradient(circle at 50% 50%, black 0%, transparent 70%)",
+        WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 0%, transparent 70%)",
+        pointerEvents: "none",
+        zIndex: 0
+      }} />
 
-      <div className="container px-5 sm:px-6 md:px-6">
-        <div className="max-w-7xl mx-auto">
-          <FadeInWhenVisible>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-mono text-primary bg-primary/10 rounded-full mb-6 sm:mb-8">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              Projects
-            </span>
-          </FadeInWhenVisible>
-          
-          <FadeInWhenVisible delay={0.1}>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-6 sm:mb-8">
-              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Featured{" "}
-                <span className="text-gradient">Work</span>
-              </h3>
-              
-              <motion.div
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Link to="/projects">
-                  <Button variant="ghost" className="mt-3 sm:mt-4 md:mt-0 group text-base sm:text-lg text-muted-foreground hover:text-foreground">
-                    View All Projects
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </motion.div>
-            </div>
-          </FadeInWhenVisible>
-          
-          {/* Apple Cards Carousel */}
-          <Carousel items={cards} />
+      <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
+        <div className="flex flex-col mb-16">
+          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-tight uppercase">
+            PROJECTS
+          </h2>
+          <div className="h-1 w-12 bg-[#ea580c] mt-4" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative">
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="group relative bg-[#0a0a0a] rounded-2xl overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 hover:-translate-y-1"
+            >
+              {/* Project Cover Image */}
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[16/10] overflow-hidden cursor-pointer">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Subtle bottom fade into card body */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+              </a>
+
+              {/* Card Body */}
+              <div className="p-6 md:p-8 space-y-4">
+                {/* Meta row */}
+                <div className="flex items-center justify-between">
+                  <span className="font-space-mono text-[10px] text-zinc-500 uppercase tracking-[0.15em]">
+                    {project.year} — {project.role}
+                  </span>
+                  <div className="flex gap-3">
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="text-zinc-600 hover:text-white transition-colors duration-300"
+                    >
+                      <Github size={16} />
+                    </a>
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="text-zinc-600 hover:text-[#ea580c] transition-colors duration-300"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-white font-formula-condensed uppercase tracking-tight group-hover:text-[#ea580c] transition-colors duration-400">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-zinc-400 font-outfit text-sm leading-relaxed line-clamp-2">
+                  {project.description}
+                </p>
+
+                {/* Tech pills */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {project.tech.map(t => (
+                    <span key={t} className="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] text-[10px] font-space-mono text-zinc-500 uppercase tracking-wider rounded-full">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

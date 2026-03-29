@@ -14,8 +14,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['Space Mono', 'JetBrains Mono', 'monospace'],
+        formula: ['Formula', 'sans-serif'],
+        'formula-condensed': ['Formula Condensed', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
+        'space-mono': ['Space Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -143,6 +147,10 @@ export default {
           "0%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        "grid": {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -164,6 +172,7 @@ export default {
         "gradient-x": "gradient-x 5s ease infinite",
         "gradient-y": "gradient-y 5s ease infinite",
         "text-shimmer": "text-shimmer 3s ease-out infinite alternate",
+        "grid": "grid 15s linear infinite",
       },
     },
   },

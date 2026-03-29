@@ -1,0 +1,41 @@
+/* Formula Font Family - Fallback to system fonts */
+@font-face {
+  font-family: 'Formula';
+  src: local('Arial'), local('Helvetica'), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Formula';
+  src: local('Arial Bold'), local('Helvetica Bold'), sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Formula Condensed - Using actual font files */
+@font-face {
+  font-family: 'Formula Condensed';
+  src: url('/FormulaCondensed-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Formula Condensed';
+  src: url('/FormulaCondensed-Light.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Formula Condensed';
+  src: url('/FormulaCondensed-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

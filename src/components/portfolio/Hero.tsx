@@ -1,307 +1,304 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-import { HiMail } from "react-icons/hi";
-import { useMemo, useState, useRef, useCallback, memo } from "react";
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
+import { memo, useEffect } from "react";
+import "@/fonts.css";
 import { Spotlight } from "@/components/ui/spotlight";
-import { FlipWords } from "@/components/ui/text-generate-effect";
-import { BackgroundBeams } from "@/components/ui/background-effects";
-
-// Memoized social links to prevent recreation
-const SOCIAL_LINKS = [
-  { href: "https://github.com/chiragkhatri19", icon: FaGithub, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/chiragk19/", icon: FaLinkedinIn, label: "LinkedIn" },
-  { href: "mailto:chirag.khatri@example.com", icon: HiMail, label: "Email" },
-] as const;
-
-const FLIP_WORDS = ["scalable web apps", "clean user experiences", "modern interfaces", "robust backends"] as const;
-
-// Memoized animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.8,
-      ease: "easeOut" as const,
-    },
-  },
-};
 
 const Hero = memo(() => {
-  const sectionRef = useRef<HTMLElement>(null);
-  // Mouse position for reveal effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  // Smooth spring animation for mouse follow - optimized stiffness for performance
-  const springConfig = useMemo(() => ({ stiffness: 150, damping: 20 }), []);
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
+  useEffect(() => {
+    // Update the resolution indicator with dynamic dimensions
+    const ideasElement = document.getElementById('ideas-span');
+    const dimensionsDisplay = document.getElementById('dimensions-display');
 
-  // Memoized mouse move handler to prevent recreation
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  }, [mouseX, mouseY]);
-  
-  const handleMouseEnter = useCallback(() => {}, []);
-  const handleMouseLeave = useCallback(() => {}, []);
+    if (ideasElement && dimensionsDisplay) {
+      const updateDimensions = () => {
+        const rect = ideasElement.getBoundingClientRect();
+        const width = Math.round(rect.width);
+        const height = Math.round(rect.height);
+        dimensionsDisplay.textContent = `${width} × ${height}`;
+      };
 
-  // Create the mask template for the water reveal effect - soft blurred edges
-  const maskTemplate = useMotionTemplate`radial-gradient(circle 350px at ${springX}px ${springY}px, transparent 0%, transparent 15%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.75) 75%, black 90%, black 100%)`;
-  
-  // Generate random particles - seeded for consistency, reduced count for performance
-  const particles = useMemo(() => {
-    const seed = 42;
-    const random = (i: number) => ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
-    return Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      left: `${random(i) * 100}%`,
-      delay: `${random(i + 100) * 12}s`,
-      duration: `${12 + random(i + 200) * 8}s`,
-      size: `${2 + random(i + 300) * 4}px`,
-    }));
-  }, []);
+      // Update every 100ms to track animation
+      const interval = setInterval(updateDimensions, 100);
+      updateDimensions(); // Initial call
 
-  // Bubbles for underwater effect - reduced for performance
-  const bubbles = useMemo(() => {
-    const seed = 73;
-    const random = (i: number) => ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
-    return Array.from({ length: 18 }, (_, i) => ({
-      id: i,
-      left: `${5 + random(i) * 90}%`,
-      delay: `${random(i + 100) * 10}s`,
-      duration: `${10 + random(i + 200) * 8}s`,
-      size: `${5 + random(i + 300) * 12}px`,
-    }));
+      return () => clearInterval(interval);
+    }
   }, []);
 
   return (
-    <Spotlight containerClassName="relative min-h-screen" className="min-h-screen flex items-center justify-center">
-      <section 
-        ref={sectionRef}
-        id="hero" 
-        className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {/* Background Effects */}
-        <BackgroundBeams />
-      
-      {/* Complex animated background */}
-      <div className="hero-bg">
-        {/* Mesh gradient - main color layer */}
-        <div className="mesh-gradient" />
-        
-        {/* Floating organic shapes */}
-        <div className="floating-shape floating-shape-1" />
-        <div className="floating-shape floating-shape-2" />
-        <div className="floating-shape floating-shape-3" />
-        <div className="floating-shape floating-shape-4" />
-        
-        {/* Grid pattern */}
-        <div className="grid-pattern" />
-        
-        {/* Floating particles */}
-        <div className="particles">
-          {particles.map((particle) => (
-            <div
-              key={particle.id}
-              className="particle"
-              style={{
-                left: particle.left,
-                animationDelay: particle.delay,
-                animationDuration: particle.duration,
-                width: particle.size,
-                height: particle.size,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Underwater bubbles - behind water layer */}
-        <div className="bubbles">
-          {bubbles.slice(0, 10).map((bubble) => (
-            <div
-              key={`bubble-${bubble.id}`}
-              className="bubble"
-              style={{
-                left: bubble.left,
-                animationDelay: bubble.delay,
-                animationDuration: bubble.duration,
-                width: bubble.size,
-                height: bubble.size,
-              }}
-            />
-          ))}
-        </div>
-        
-        {/* Noise texture */}
-        <div className="noise-overlay" />
-      </div>
-      
-      {/* Water overlay with mouse-following reveal hole - hidden on mobile/tablet */}
-      <motion.div 
-        className="water-overlay hidden lg:block"
-        style={{
-          maskImage: maskTemplate,
-          WebkitMaskImage: maskTemplate,
-        }}
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        background: "transparent",
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: "'Formula', sans-serif"
+      }}
+    >
+      {/* Aceternity Spotlight - Diagonal from Upper Left to IDEAS text */}
+      <Spotlight
+        className="-top-[750px] -left-[80px] md:-top-[730px] md:-left-[60px] pointer-events-none"
+        fill="url(#spotlightGradient)"
       />
-      
-      {/* Bubbles layer - in FRONT of water */}
-      <div className="bubbles-front">
-        {bubbles.map((bubble) => (
-          <div
-            key={`bubble-front-${bubble.id}`}
-            className="bubble"
-            style={{
-              left: bubble.left,
-              animationDelay: bubble.delay,
-              animationDuration: bubble.duration,
-              width: bubble.size,
-              height: bubble.size,
-            }}
-          />
-        ))}
-      </div>
-      
-        {/* Text content - underwater by default */}
-        <div className="container px-5 sm:px-6 md:px-6 max-w-6xl relative z-10">
-          <motion.div
-            className="flex flex-col items-center text-center space-y-5 sm:space-y-6 md:space-y-10 py-6 md:py-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-          {/* Status badge */}
-          <motion.div variants={itemVariants}>
-            <motion.span
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/30 bg-white/80 dark:bg-background/70 backdrop-blur-md text-sm md:text-base text-primary font-medium shadow-lg shadow-primary/10 dark:shadow-primary/5"
-              whileHover={{ scale: 1.08, borderColor: "hsl(var(--primary))" }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-              </span>
-              Available for work
-            </motion.span>
-          </motion.div>
 
-          {/* Main heading - LARGER and more prominent */}
-          <motion.div className="space-y-4 md:space-y-6" variants={itemVariants}>
-            <h1 
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-[1.1] sm:leading-tight"
-            >
-              Hey, I'm{" "}
-              <span className="text-gradient">Chirag</span>{" "}
-              <motion.span
-                className="inline-block"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                👋
-              </motion.span>
-            </h1>
-          </motion.div>
-          
-          {/* Subtitle with FlipWords - LARGER */}
-          <motion.div className="max-w-4xl space-y-3 sm:space-y-4 md:space-y-6" variants={itemVariants}>
-            <p className="text-xl sm:text-2xl md:text-4xl font-semibold text-foreground leading-relaxed">
-              I build <FlipWords words={FLIP_WORDS as unknown as string[]} duration={3000} />
-            </p>
-            <p className="text-base sm:text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
-              Full Stack Developer focused on performance, simplicity, and real-world products.
-            </p>
-          </motion.div>
-          
-          {/* CTA Buttons - Enhanced hover animations */}
-          <motion.div
-            className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 pt-2 sm:pt-4 w-full sm:w-auto"
-            variants={itemVariants}
-          >
-            <motion.div
-              whileHover={{ scale: 1.08, y: -4 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              className="w-full sm:w-auto"
-            >
-              <Button variant="hero" size="lg" asChild className="magnetic-btn group relative overflow-hidden shadow-xl text-base md:text-lg px-6 sm:px-8 md:px-10 h-12 sm:h-14 md:h-16 rounded-xl w-full sm:w-auto">
-                <a href="#contact" className="relative z-10">
-                  <span className="absolute -inset-1 bg-gradient-to-r from-primary via-glow-secondary to-primary bg-[length:200%_100%] animate-shimmer opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-xl blur-sm" />
-                  <span className="relative flex items-center gap-2">
-                    <HiMail className="w-5 h-5 md:w-6 md:h-6" />
-                    Get in Touch
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-2" />
-                  </span>
-                </a>
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.08, y: -4 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              className="w-full sm:w-auto"
-            >
-              <Button variant="heroOutline" size="lg" asChild className="magnetic-btn group relative overflow-hidden shadow-xl text-base md:text-lg px-6 sm:px-8 md:px-10 h-12 sm:h-14 md:h-16 rounded-xl border-2 hover:border-primary hover:bg-primary/10 transition-all duration-300 w-full sm:w-auto">
-                <a href="#projects" className="relative z-10">
-                  <span className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-glow-secondary/20 to-primary/30 bg-[length:200%_100%] animate-shimmer opacity-0 group-hover:opacity-40 transition-opacity duration-300 rounded-xl blur-sm" />
-                  <span className="relative">View Projects</span>
-                </a>
-              </Button>
-            </motion.div>
-          </motion.div>
-          
-          {/* Social Links - Bigger with bold icons */}
-          <motion.div
-            className="flex items-center gap-3 sm:gap-5 md:gap-8 pt-4 sm:pt-6 md:pt-8"
-            variants={itemVariants}
-          >
-            <div className="h-px w-8 sm:w-12 md:w-20 bg-gradient-to-r from-transparent to-border hidden sm:block" />
-            {SOCIAL_LINKS.map((social, index) => (
-              <motion.div
-                key={social.label}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1 + index * 0.1, type: "spring", stiffness: 200 }}
-                whileHover={{ scale: 1.15, y: -5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Button variant="social" size="icon" asChild className="shadow-lg w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 rounded-xl sm:rounded-2xl hover:bg-primary/15 hover:border-primary transition-all duration-300">
-                  <a href={social.href} target={social.href.startsWith("http") ? "_blank" : undefined} rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined} aria-label={social.label}>
-                    <social.icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" />
-                  </a>
-                </Button>
-              </motion.div>
-            ))}
-            <div className="h-px w-8 sm:w-12 md:w-20 bg-gradient-to-l from-transparent to-border hidden sm:block" />
-          </motion.div>
-          </motion.div>
+      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+        <defs>
+          <radialGradient id="spotlightGradient" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stopColor="rgba(59, 130, 246, 1)" />
+            <stop offset="50%" stopColor="rgba(59, 130, 246, 0)" />
+            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+          </radialGradient>
+        </defs>
+      </svg>
+
+      {/* Grid Pattern from Magic UI with Circular Gradient Fade */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        backgroundImage: `
+          linear-gradient(to right, rgba(80, 80, 90, 0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(80, 80, 90, 0.08) 1px, transparent 1px)
+        `,
+        backgroundSize: "80px 80px",
+        maskImage: "radial-gradient(circle at 50% 20%, black 0%, black 25%, transparent 45%)",
+        WebkitMaskImage: "radial-gradient(circle at 50% 20%, black 0%, black 25%, transparent 45%)",
+        pointerEvents: "none",
+        zIndex: 1
+      }} />
+
+      {/* Additional gradient overlay for depth */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        background: "radial-gradient(circle at 50% 20%, rgba(35, 40, 50, 0.2) 0%, rgba(25, 30, 40, 0.15) 35%, transparent 60%)",
+        pointerEvents: "none",
+        zIndex: 1
+      }} />
+
+
+
+      {/* Animation Styles for Mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          #hero h1 {
+            alignItems: "center" !important;
+          }
+        }
+      `}</style>
+
+      {/* Block 1: Centered Headline */}
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "60vh",
+        paddingTop: 140,
+        textAlign: "center",
+        position: "relative",
+        zIndex: 2
+      }}>
+        <h1 style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "4px",
+          fontSize: "90px",
+          fontWeight: 700,
+          lineHeight: 1,
+          letterSpacing: "0.01em",
+          color: "#FFFFFF",
+          textTransform: "uppercase",
+          margin: 0,
+          fontFamily: "'Formula Condensed', sans-serif",
+          position: "relative",
+          zIndex: 10
+        }}>
+          <span style={{ display: "block", marginBottom: "4px" }}>TURNING</span>
+
+          <span style={{ display: "block" }}>
+            <span
+              id="ideas-span"
+              className="inline-block relative overflow-visible"
+              style={{
+                padding: "16px 12px 0 12px",
+                border: "1.5px solid rgba(255, 255, 255, 0.4)",
+                borderRadius: "2px",
+                animation: "ideasExpand 6s ease-in-out infinite, ideasFlicker 6s step-end infinite",
+                whiteSpace: "nowrap",
+                transform: "translateY(0)"
+              }}>
+              {/* Corner L-marks - Technical Design Look */}
+              <div className="absolute top-[-2px] left-[-2px] w-3 h-3 border-t-[3px] border-l-[3px] border-white" />
+              <div className="absolute top-[-2px] right-[-2px] w-3 h-3 border-t-[3px] border-r-[3px] border-white" />
+              <div className="absolute bottom-[-2px] left-[-2px] w-3 h-3 border-b-[3px] border-l-[3px] border-white" />
+              <div className="absolute bottom-[-2px] right-[-2px] w-3 h-3 border-b-[3px] border-r-[3px] border-white" />
+              
+              IDEAS
+
+              {/* Dimension text - Technical Label */}
+              <div className="absolute -top-[11px] left-1/2 -translate-x-1/2 flex items-center justify-center">
+                <span 
+                  id="dimensions-display"
+                  className="bg-white text-black text-[9px] font-mono font-bold px-1.5 py-0.5 whitespace-nowrap leading-none tracking-normal"
+                  style={{ fontFamily: "'Space Mono', monospace" }}
+                >
+                  642 × 124
+                </span>
+              </div>
+            </span>
+            {" "}INTO
+          </span>
+          <span style={{
+            display: "block",
+            marginTop: "16px",
+            animation: "realityFill 10s ease-in-out infinite"
+          }}>REALITY</span>
+        </h1>
+      </div>
+
+      {/* Animation Styles */}
+      <style>{`
+        @keyframes resolutionPulse {
+          0%, 100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+        
+        @keyframes realityFill {
+          0% {
+            color: transparent;
+            -webkit-text-stroke: 2px #FFFFFF;
+            opacity: 0.5;
+          }
+          15% {
+            color: #FFFFFF;
+            -webkit-text-stroke: 0px;
+            opacity: 1;
+          }
+          85% {
+            color: #FFFFFF;
+            -webkit-text-stroke: 0px;
+            opacity: 1;
+          }
+          100% {
+            color: transparent;
+            -webkit-text-stroke: 2px #FFFFFF;
+            opacity: 0.5;
+          }
+        }
+      `}</style>
+
+      {/* Animation Styles */}
+      <style>{`
+        @keyframes ideasExpand {
+          0% { letter-spacing: -0.02em; padding: 16px 12px 0 12px; }
+          15% { letter-spacing: -0.02em; padding: 16px 12px 0 12px; }
+          25% { letter-spacing: 0.15em; padding: 16px 24px 0 24px; }
+          30% { letter-spacing: 0.15em; padding: 16px 24px 0 24px; }
+          45% { letter-spacing: -0.02em; padding: 16px 12px 0 12px; }
+          100% { letter-spacing: -0.02em; padding: 16px 12px 0 12px; }
+        }
+        @keyframes ideasFlicker {
+          0%, 100% { opacity: 1; }
+          26% { opacity: 0.8; }
+          27% { opacity: 1; }
+          28% { opacity: 0.6; }
+          29% { opacity: 1; }
+        }
+      `}</style>
+
+      {/* Block 3: Two-Column Bio Section */}
+      <div className="bio-zone grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 px-6 md:px-[60px] pb-20 max-w-[1200px] mx-auto items-start relative z-10 transition-all duration-700">
+        {/* Left: Bold Statement */}
+        <div className="lg:mt-[130px] text-left">
+          <p className="bio-statement text-4xl sm:text-5xl md:text-8xl font-black leading-[1.05] md:leading-[0.95] tracking-tighter uppercase text-white font-formula-condensed" style={{ textShadow: "0 0 40px rgba(234,88,12,0.15), 0 0 80px rgba(234,88,12,0.08), 0 4px 12px rgba(0,0,0,0.5)" }}>
+            HI! I'M <span className="text-[#ea580c]">CHIRAG</span>,
+            <br />
+            I LOVE MAKING THINGS
+            <br />
+            THAT SOLVES A REAL <span className="text-[#ea580c]">PROBLEM</span>
+          </p>
         </div>
-      </section>
-    </Spotlight>
+
+        {/* Right: Body Copy */}
+        <div className="max-w-[480px] lg:mt-[120px] text-left">
+          <p className="text-[15px] md:text-[16px] leading-[1.8] text-white/70 mb-8 font-mono tracking-tight" style={{ textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)" }}>
+            i'm a cs student who loves building things that actually get used. i spend most of my time shipping full-stack apps, experimenting with AI workflows to move faster, and figuring out how to make stuff that doesn't suck. still learning, still breaking things — but that's kinda the point.
+          </p>
+
+          <div className="mt-10 group">
+            <a 
+              href="/chirag_khatri_resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex flex-col gap-1 no-underline"
+            >
+              <div className="bg-white px-8 py-4 rounded-[4px] flex items-center gap-3 transition-transform duration-300 group-hover:-translate-y-1">
+                <span className="text-black font-formula-condensed text-xl font-black tracking-wider uppercase">
+                  DOWNLOAD CV
+                </span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <style>{`
+        @keyframes resolutionPulse {
+          0%, 100% {
+            opacity: 0.7;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.02);
+          }
+        }
+
+        @media (max-width: 768px) {
+          #hero header {
+            top: 12px !important;
+            padding: 8px 16px !important;
+            gap: 24px !important;
+          }
+          
+          #hero nav {
+            gap: 16px !important;
+          }
+          
+          #hero nav a {
+            font-size: 13px !important;
+          }
+          
+          #hero h1 {
+            font-size: clamp(48px, 14vw, 72px) !important;
+          }
+          
+          #hero .bio-zone {
+            grid-template-columns: 1fr !important;
+            padding: 32px 24px 60px !important;
+            gap: 32px !important;
+          }
+          
+          #hero .bio-statement {
+            font-size: clamp(24px, 7vw, 36px) !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 });
 
-Hero.displayName = 'Hero';
-
+Hero.displayName = "Hero";
 export default Hero;
