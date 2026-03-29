@@ -8,7 +8,8 @@ import {
   SiRedux, SiFigma, SiGithub,
   SiVite, SiTurborepo,
   SiFastapi, SiFastify, SiBun, SiHono, SiClerk, SiRadixui, SiShadcnui,
-  SiPosthog, SiAppwrite, SiLinux, SiDavinciresolve, SiArchlinux
+  SiPosthog, SiAppwrite, SiLinux, SiDavinciresolve, SiArchlinux,
+  SiRust, SiGo
 } from "react-icons/si";
 import { type IconType } from "react-icons";
 import { motion } from "framer-motion";
@@ -45,6 +46,8 @@ const TECH_STACK: TechItem[] = [
   // Core Languages
   { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
   { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  { icon: SiRust, name: "Rust", color: "#F74C00" },
+  { icon: SiGo, name: "Go", color: "#00ADD8" },
   { icon: SiPython, name: "Python", color: "#3776AB" },
   { icon: SiOpenjdk, name: "Java", color: "#ED8B00" },
   // Primary Frameworks

@@ -219,6 +219,7 @@ const Projects = memo(() => {
                 <img 
                   src={project.image} 
                   alt={project.title} 
+                  loading="lazy"
                   className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 {/* Subtle bottom fade into card body */}
