@@ -18,7 +18,6 @@ const GitHubSection = () => {
         className="rounded-[2rem] border border-white/5 bg-white/[0.01] backdrop-blur-3xl overflow-hidden group transition-all duration-700 hover:border-white/10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Main Info */}
           <div className="lg:col-span-8 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/5">
             <div className="flex items-start justify-between mb-10">
               <div className="flex items-center gap-5">
@@ -36,7 +35,7 @@ const GitHubSection = () => {
             </div>
 
             <p className="text-lg md:text-xl text-zinc-400 font-outfit leading-relaxed max-w-2xl mb-12">
-              Architecting <span className="text-white">GLOS</span> — a UI-context-aware localization engine. My open-source footprint encompasses 39 public repositories focusing on full-stack architecture and AI research.
+              Architecting <span className="text-white">GLOS</span> a UI-context-aware localization engine. My open-source footprint encompasses 39 public repositories focusing on full-stack architecture and AI research.
             </p>
 
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
@@ -57,7 +56,6 @@ const GitHubSection = () => {
             </div>
           </div>
 
-          {/* Activity Visual */}
           <div className="lg:col-span-4 p-8 lg:p-12 bg-white/[0.01] flex flex-col justify-between">
             <div className="space-y-6">
               <div className="text-[10px] font-bold font-space-mono text-zinc-500 uppercase tracking-[0.3em]">Code Activity</div>
@@ -103,7 +101,6 @@ const XSection = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Profile Info */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -145,7 +142,6 @@ const XSection = () => {
           </div>
         </motion.div>
 
-        {/* Magic UI Tweet Card */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +153,6 @@ const XSection = () => {
             <div className="text-[10px] font-bold font-space-mono text-zinc-500 uppercase tracking-[0.3em]">Most Recent Log</div>
           </div>
           
-          {/* Using the Magic UI style Tweet Card */}
           <TweetCard id="1643690335988781058" className="w-full bg-white/[0.02] border-white/5 shadow-2xl" />
 
           <motion.a 

@@ -14,7 +14,6 @@ import {
 import { type IconType } from "react-icons";
 import { motion } from "framer-motion";
 
-// Custom Adobe icon components
 const AdobePr = ({ size = 52, style }: { size?: number; style?: React.CSSProperties }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={style}>
     <rect width="48" height="48" rx="8" fill="#00005B"/>
@@ -43,14 +42,12 @@ type TechItem = {
 };
 
 const TECH_STACK: TechItem[] = [
-  // Core Languages
   { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
   { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
   { icon: SiRust, name: "Rust", color: "#F74C00" },
   { icon: SiGo, name: "Go", color: "#00ADD8" },
   { icon: SiPython, name: "Python", color: "#3776AB" },
   { icon: SiOpenjdk, name: "Java", color: "#ED8B00" },
-  // Primary Frameworks
   { icon: SiReact, name: "React", color: "#61DAFB" },
   { icon: SiNextdotjs, name: "Next.js", color: "#FFFFFF" },
   { icon: SiNodedotjs, name: "Node.js", color: "#339933" },
@@ -60,13 +57,11 @@ const TECH_STACK: TechItem[] = [
   { icon: SiFastify, name: "Fastify", color: "#FFFFFF" },
   { icon: SiHono, name: "Hono", color: "#FF5F00" },
   { icon: SiBun, name: "Bun", color: "#FBF0DF" },
-  // UI & State
   { icon: SiRedux, name: "Redux", color: "#764ABC" },
   { icon: SiShadcnui, name: "Shadcn/ui", color: "#FFFFFF" },
   { icon: SiRadixui, name: "Radix UI", color: "#FFFFFF" },
   { icon: SiFramer, name: "Framer", color: "#0055FF" },
   { icon: SiClerk, name: "Clerk", color: "#6C47FF" },
-  // Databases & Backend Services
   { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
   { icon: SiPrisma, name: "Prisma", color: "#2D3748" },
@@ -74,13 +69,11 @@ const TECH_STACK: TechItem[] = [
   { icon: SiFirebase, name: "Firebase", color: "#FFCA28" },
   { icon: SiAppwrite, name: "Appwrite", color: "#FD366E" },
   { icon: SiGraphql, name: "GraphQL", color: "#E10098" },
-  // Design & Creative
   { icon: SiFigma, name: "Figma", color: "#F24E1E" },
   { icon: AdobePr, name: "Premiere Pro", color: "#9999FF" },
   { icon: AdobeAe, name: "After Effects", color: "#9999FF" },
   { icon: AdobePs, name: "Photoshop", color: "#31A8FF" },
   { icon: SiDavinciresolve, name: "DaVinci", color: "#E34427" },
-  // DevOps & Tooling
   { icon: SiGit, name: "Git", color: "#F05032" },
   { icon: SiGithub, name: "GitHub", color: "#FFFFFF" },
   { icon: SiDocker, name: "Docker", color: "#2496ED" },
@@ -96,7 +89,6 @@ const Skills = memo(() => {
   return (
     <section id="stack" className="bg-transparent py-24 relative">
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px]">
-        {/* Simplified Header */}
         <div className="flex flex-col mb-16">
           <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
             STACK
@@ -104,7 +96,6 @@ const Skills = memo(() => {
           <div className="h-1 w-12 bg-[#ea580c] mt-4" />
         </div>
 
-        {/* Left-Aligned Bolder Tech Stack with Larger Icons */}
         <div className="grid grid-cols-5 gap-y-6 md:flex md:flex-wrap md:items-center md:justify-start md:gap-x-1 md:gap-y-6">
           {TECH_STACK.map((item, idx) => {
             const Icon = item.icon;
@@ -118,7 +109,7 @@ const Skills = memo(() => {
                 className="group relative cursor-pointer px-1 md:px-3 flex flex-col items-center"
               >
                 <Icon 
-                  size={52} 
+                   size={52} 
                   style={{ color: item.color }} 
                   className="drop-shadow-[0_0_12px_rgba(0,0,0,0.6)] opacity-90 group-hover:opacity-100 transition-opacity"
                 />
@@ -130,7 +121,6 @@ const Skills = memo(() => {
           })}
         </div>
 
-        {/* Subtle Footer Divider */}
         <div className="mt-32 w-full h-[1px] bg-white/[0.03]" />
       </div>
     </section>

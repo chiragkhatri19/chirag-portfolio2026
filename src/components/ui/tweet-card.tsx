@@ -2,10 +2,6 @@ import { memo } from "react";
 import { Tweet } from "react-tweet";
 import { cn } from "@/lib/utils";
 
-/**
- * A styled Tweet wrapper from Magic UI.
- * This is a Client Component.
- */
 const TweetCard = memo(({ id, className }: { id: string; className?: string }) => {
   return (
     <div className={cn(
@@ -13,13 +9,11 @@ const TweetCard = memo(({ id, className }: { id: string; className?: string }) =
       className
     )}>
       <div className="flex w-full overflow-hidden [&>div]:w-full">
-        {/* Magic UI's TweetCard usually sets a dark theme for react-tweet */}
         <div className="tweet-container w-full" data-theme="dark">
             <Tweet id={id} />
         </div>
       </div>
       
-      {/* Add custom CSS to style the nested tweet elements directly into the card context if needed */}
       <style>{`
         .tweet-container .react-tweet-theme {
           --tweet-bg-color: transparent !important;

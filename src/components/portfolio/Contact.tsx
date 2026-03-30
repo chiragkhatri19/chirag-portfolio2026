@@ -20,7 +20,6 @@ const Contact = memo(() => {
       className="py-32 relative bg-transparent overflow-hidden"
     >
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
-        {/* Big bold CTA headline */}
         <div className="mb-20">
           <span className="font-space-mono text-[10px] text-zinc-500 uppercase tracking-[0.4em] mb-4 block">
             Let's Connect
@@ -33,7 +32,6 @@ const Contact = memo(() => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left: Clean minimal form */}
           <div>
             <form className="space-y-10">
               <div className="space-y-1">
@@ -86,11 +84,10 @@ const Contact = memo(() => {
             </form>
           </div>
 
-          {/* Right: Social links + availability */}
           <div className="flex flex-col justify-between">
             <div className="space-y-6">
               <p className="text-zinc-400 font-outfit text-lg leading-relaxed">
-                prefer a direct message? hit me up on any of these — i usually respond within a day.
+                prefer a direct message? hit me up on any of these i usually respond within a day.
               </p>
 
               <div className="space-y-3">
@@ -115,7 +112,6 @@ const Contact = memo(() => {
               </div>
             </div>
 
-            {/* Availability badge */}
             <div className="mt-12 flex items-center gap-3 py-4">
               <div className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />

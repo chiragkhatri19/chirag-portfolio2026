@@ -1,15 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* Chirag Khatri Portfolio - damnitrahul.com UI Design System */
-/* Force dark mode only - #0a0a0a background, #d4ff00 accent */
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Spotlight Animation */
 @keyframes spotlight {
   0% {
     opacity: 0;
@@ -26,7 +22,6 @@
   animation: spotlight 3s ease-out forwards;
 }
 
-/* Shimmer Animation for Contact Button */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -37,7 +32,6 @@
   }
 }
 
-/* Marquee Animations for Tech Stack */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -70,11 +64,9 @@
   --text: #e8e8e8;
   --muted: #6b6b6b;
   --accent: #ea580c;
-  /* Orange-600 */
   --mono: 'DM Mono', monospace;
   --sans: 'DM Sans', sans-serif;
 
-  /* Dark mode theme variables */
   --background-black: 0, 0%, 8%;
   --background-card: 40, 4%, 13%;
   --background-border: 0, 0%, 32%;
@@ -98,8 +90,6 @@
   --white: hsl(var(--zinc-50));
   --black: hsl(var(--zinc-950));
   --background-gradient: linear-gradient(to bottom, #030712 0%, #050505 8%, #0a0a0a 14%, #111111 20%, #111111 100%);
-
-  /* Extended color palette */
   --slate-50: 210 40% 98%;
   --slate-100: 210 40% 96.1%;
   --slate-200: 214.3 31.8% 91.4%;
@@ -372,7 +362,6 @@ body {
 @tailwind components;
 @tailwind utilities;
 
-/* Lenis Smooth Scroll */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -394,12 +383,8 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Chirag Khatri Portfolio - Premium Design System */
-/* Sophisticated slate/emerald palette */
-
 @layer base {
   :root {
-    /* Light Mode - Clean Warm */
     --background: 40 20% 97%;
     --foreground: 30 10% 10%;
 
@@ -429,7 +414,6 @@ html.lenis body {
     --ring: 35 25% 45%;
 
     --orange-600: 25 95% 53%;
-    /* #ea580c */
 
     --radius: 0.75rem;
 
@@ -451,7 +435,6 @@ html.lenis body {
   }
 
   .dark {
-    /* Dark Mode - Warm Minimal */
     --background: 30 6% 6%;
     --foreground: 40 20% 97%;
 
@@ -494,13 +477,10 @@ html.lenis body {
 
 @layer base {
 
-  /* Performance optimizations */
-  * {
+* {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* GPU acceleration hints for animated elements */
   .will-change-transform {
     will-change: transform;
   }
@@ -509,18 +489,15 @@ html.lenis body {
     will-change: opacity;
   }
 
-  /* Force GPU layer for frequently animated elements */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
-  /* Contain paint for sections to isolate repaints */
   section {
     contain: layout style;
   }
 
-  /* Reduce motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -552,7 +529,6 @@ html.lenis body {
     text-rendering: optimizeLegibility;
   }
 
-  /* Space Grotesk Typography Scale */
   h1,
   h2,
   h3,
@@ -578,9 +554,6 @@ html.lenis body {
     font-weight: 500;
   }
 
-  /* Clean flat background — no gradient */
-
-  /* Disable custom cursor on touch devices */
   @media (hover: none),
   (max-width: 1024px) {
     body {
@@ -593,7 +566,6 @@ html.lenis body {
     }
   }
 
-  /* Mobile-specific base styles */
   @media (max-width: 639px) {
     html {
       font-size: 15px;
@@ -608,7 +580,6 @@ html.lenis body {
 
 @layer components {
 
-  /* Clean Glassmorphism - Minimal */
   .glass-card {
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
@@ -632,7 +603,6 @@ html.lenis body {
     }
   }
 
-  /* Scroll Animation Classes */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -677,7 +647,6 @@ html.lenis body {
     transform: scale(1);
   }
 
-  /* Stagger delays */
   .stagger-1 {
     transition-delay: 0.1s;
   }
@@ -698,7 +667,6 @@ html.lenis body {
     transition-delay: 0.5s;
   }
 
-  /* Text gradient animation */
   .text-gradient-animate {
     background: linear-gradient(90deg, hsl(var(--primary)), #a855f7, hsl(var(--primary)));
     background-size: 200% auto;
@@ -720,7 +688,6 @@ html.lenis body {
     }
   }
 
-  /* Floating animation */
   .float {
     animation: float 6s ease-in-out infinite;
   }
@@ -737,7 +704,6 @@ html.lenis body {
     }
   }
 
-  /* Enhanced glass variants */
   .glass-card-strong {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(24px);
@@ -756,7 +722,6 @@ html.lenis body {
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  /* Spotlight hover effect */
   .glass-spotlight {
     position: relative;
     overflow: hidden;
@@ -784,7 +749,6 @@ html.lenis body {
     background-image: radial-gradient(circle at top right, #09090b 0%, #000000 100%);
   }
 
-  /* Ambient Shadows - Rare and Soft per Tahoe Midnight */
   .shadow-ambient {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
@@ -863,30 +827,25 @@ html.lenis body {
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Page transition */
   .page-transition {
     animation: pageEnter 0.6s ease-out;
   }
 
-  /* Parallax container */
   .parallax-section {
     will-change: transform;
     transition: transform 0.1s ease-out;
   }
 
-  /* Magnetic button effect */
   .magnetic-btn {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Hero background container */
   .hero-bg {
     position: absolute;
     inset: 0;
     overflow: hidden;
   }
 
-  /* Hide scrollbars on hero section */
   #hero,
   section:first-of-type {
     overflow: hidden;
@@ -899,7 +858,6 @@ html.lenis body {
     display: none;
   }
 
-  /* Clean fade at bottom of hero section */
   .hero-bg::after {
     content: '';
     position: absolute;
@@ -916,7 +874,6 @@ html.lenis body {
     z-index: 5;
   }
 
-  /* Aurora-style animated gradient - VIBRANT */
   .mesh-gradient {
     position: absolute;
     inset: -100%;
@@ -946,7 +903,6 @@ html.lenis body {
     filter: blur(80px);
   }
 
-  /* Floating blob shapes with organic movement - GPU optimized */
   .floating-shape {
     position: absolute;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -1015,7 +971,6 @@ html.lenis body {
     background: radial-gradient(circle at 40% 60%, hsl(var(--glow-quaternary) / 0.3), hsl(var(--glow-primary) / 0.08));
   }
 
-  /* Mobile optimizations for floating shapes */
   @media (max-width: 768px) {
     .floating-shape {
       opacity: 0.5;
@@ -1038,7 +993,6 @@ html.lenis body {
     }
   }
 
-  /* Dotted grid pattern - tighter spacing */
   .grid-pattern {
     position: absolute;
     inset: 0;
@@ -1051,8 +1005,6 @@ html.lenis body {
     background-image: radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.12) 1px, transparent 0);
   }
 
-  /* Water overlay effect - very subtle for light mode to show colors */
-  /* Hidden on touch devices since hover doesn't work */
   .water-overlay {
     position: absolute;
     inset: 0;
@@ -1075,7 +1027,6 @@ html.lenis body {
     backdrop-filter: blur(1.5px) brightness(0.75) saturate(1.3);
   }
 
-  /* Hide water overlay on mobile/tablet - touch devices don't have hover */
   @media (max-width: 1024px),
   (hover: none) {
     .water-overlay {
@@ -1083,7 +1034,6 @@ html.lenis body {
     }
   }
 
-  /* Bubbles in front of water layer */
   .bubbles-front {
     position: absolute;
     inset: 0;
@@ -1092,7 +1042,6 @@ html.lenis body {
     z-index: 30;
   }
 
-  /* Sparkle particles - GPU optimized */
   .particles {
     position: absolute;
     inset: 0;
@@ -1118,7 +1067,6 @@ html.lenis body {
     box-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
   }
 
-  /* Underwater Bubbles - GPU optimized */
   .bubbles {
     position: absolute;
     inset: 0;
@@ -1161,7 +1109,6 @@ html.lenis body {
     background: hsl(0 0% 100% / 0.4);
   }
 
-  /* Subtle noise texture */
   .noise-overlay {
     position: fixed;
     inset: 0;
@@ -1175,7 +1122,6 @@ html.lenis body {
     opacity: 0.03;
   }
 
-  /* Mobile optimizations for particles and bubbles */
   @media (max-width: 768px) {
     .particles .particle:nth-child(n+15) {
       display: none;
@@ -1194,7 +1140,6 @@ html.lenis body {
 
 @layer utilities {
 
-  /* Smooth Animation Utilities - 150-300ms per UI/UX best practices */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -1207,25 +1152,21 @@ html.lenis body {
     animation: scrollBounce 2s ease-in-out infinite;
   }
 
-  /* Micro-interactions - 150-200ms */
   .transition-micro {
     transition-duration: 150ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Component transitions - 200-300ms */
   .transition-component {
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Page/Full-screen transitions - 300-400ms */
   .transition-page {
     transition-duration: 350ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Easing curves */
   .ease-out-expo {
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -1238,14 +1179,12 @@ html.lenis body {
     transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* GPU Acceleration */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform, opacity;
   }
 
-  /* Hover lift effect */
   .hover-lift {
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -1254,7 +1193,6 @@ html.lenis body {
     transform: translateY(-4px);
   }
 
-  /* Focus states */
   .focus-ring {
     transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -1348,7 +1286,6 @@ html.lenis body {
   }
 }
 
-/* Spotlight Animation */
 @keyframes spotlight {
   0% {
     opacity: 0;
@@ -1491,7 +1428,6 @@ html.lenis body {
   }
 }
 
-/* damnitrahul.com UI additions */
 @keyframes marquee {
   from {
     transform: translateX(0);

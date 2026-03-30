@@ -18,7 +18,6 @@ export const ApplePillNavbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       
-      // Update active tab based on scroll position
       const sections = navItems.map(item => item.href.substring(1));
       for (const sectionId of sections.reverse()) {
         const section = document.getElementById(sectionId);

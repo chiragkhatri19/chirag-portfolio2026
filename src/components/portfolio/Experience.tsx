@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { memo } from "react";
 
-// Static data moved outside component
 const EXPERIENCES = [
   {
     role: "Full Stack Developer",
@@ -9,9 +8,9 @@ const EXPERIENCES = [
     period: "2024 - PRESENT",
     description: "Architecting high-performance web applications with technical precision and intuitive UX. Focused on building context-aware tools and scalable AI-driven platforms.",
     highlights: [
-      "Built GLOS.io — a UI-context-aware localization engine for developers",
-      "Developed FitLama — an AI fitness coach using schema-driven LLM pipelines",
-      "Created Resumate — an ATS-optimized resume builder with 10k+ potential users",
+      "Built GLOS.io a UI-context-aware localization engine for developers",
+      "Developed FitLama an AI fitness coach using schema-driven LLM pipelines",
+      "Created Resumate an ATS-optimized resume builder with 10k+ potential users",
       "Deployed automated scraping systems using Playwright and Vision AI models",
     ],
   },
@@ -41,7 +40,6 @@ const EXPERIENCES = [
   },
 ] as const;
 
-// Seeded random for deterministic values
 const seededRandom = (seed: number, i: number) =>
   ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
 
@@ -51,7 +49,6 @@ const Experience = memo(() => {
       id="experience"
       className="py-32 relative bg-transparent overflow-hidden"
     >
-      {/* Consistent Grid Pattern Background from Hero */}
       <div style={{
         position: "absolute",
         inset: 0,
@@ -67,7 +64,6 @@ const Experience = memo(() => {
       }} />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
-        {/* Simplified Header - Hero Matching */}
         <div className="flex flex-col mb-16">
           <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
             EXPERIENCE
@@ -75,9 +71,7 @@ const Experience = memo(() => {
           <div className="h-1 w-12 bg-[#ea580c] mt-4" />
         </div>
 
-        {/* Technical Journey Track */}
         <div className="relative">
-          {/* Vertical Progress Line */}
           <div className="absolute left-0 md:left-[24px] top-0 bottom-0 w-px bg-white/5 mx-auto" />
           
           <div className="space-y-16">
@@ -89,7 +83,6 @@ const Experience = memo(() => {
                 transition={{ delay: idx * 0.1 }}
                 className="group relative pl-8 md:pl-20"
               >
-                {/* Visual Marker */}
                 <div className="absolute left-[-4.5px] md:left-[19.5px] top-4 w-2.5 h-2.5 rounded-full border border-white/20 bg-black z-10 group-hover:border-primary transition-colors">
                   <div className="absolute inset-[-4px] rounded-full border border-primary/20 scale-0 group-hover:scale-100 transition-transform" />
                 </div>
@@ -100,7 +93,7 @@ const Experience = memo(() => {
                       {exp.period}
                     </span>
                     <span className="font-space-mono text-[10px] text-zinc-500 block uppercase">
-                      [{String(idx + 1).padStart(2, '0')} // NODE]
+                      [{String(idx + 1).padStart(2, '0')}]
                     </span>
                   </div>
 

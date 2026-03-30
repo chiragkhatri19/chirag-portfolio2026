@@ -1,4 +1,3 @@
-/* Formula Font Family - Fallback to system fonts */
 @font-face {
   font-family: 'Formula';
   src: local('Arial'), local('Helvetica'), sans-serif;
@@ -15,7 +14,6 @@
   font-display: swap;
 }
 
-/* Formula Condensed - Using actual font files */
 @font-face {
   font-family: 'Formula Condensed';
   src: url('/FormulaCondensed-Light.otf') format('opentype');

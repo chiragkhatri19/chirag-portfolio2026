@@ -15,6 +15,7 @@ export type Project = {
   year: string;
   role: string;
   features: string[];
+  metrics: string[];
 };
 
 export const projects: Project[] = [
@@ -37,6 +38,11 @@ export const projects: Project[] = [
       "Visual dashboard for string management",
       "Monorepo architecture with Turborepo",
     ],
+    metrics: [
+      "Built During a Weekend Hackathon",
+      "Solves Context-less AI Translations",
+      "Published CLI to NPM Registry"
+    ],
   },
   {
     id: "fit-llama-ai",
@@ -57,6 +63,11 @@ export const projects: Project[] = [
       "Goal setting and achievement milestones",
       "Social features for workout challenges",
     ],
+    metrics: [
+      "Built to Solve Personal Gym Needs",
+      "Validated by 160+ Early Testers",
+      "Scaled to 300+ Organic Users"
+    ],
   },
   {
     id: "worksea",
@@ -76,6 +87,11 @@ export const projects: Project[] = [
       "Real-time job recommendations",
       "Advanced candidate profile analysis",
       "Employer dashboard for job postings",
+    ],
+    metrics: [
+      "Built for Smart India Hackathon",
+      "Selected at College Qualifiers",
+      "Engineered AI Matching Logic"
     ],
   },
 
@@ -98,19 +114,21 @@ export const projects: Project[] = [
       "Customizable design options",
       "Keyword optimization recommendations",
     ],
+    metrics: [
+      "Generates ATS-Compliant Resumes",
+      "Optimized for Standard Parsers",
+      "Generated 250+ Resumes to Date"
+    ],
   },
 ];
 
-// Memoized project content component
 const ProjectContent = memo(({ project }: { project: Project }) => {
   return (
     <div className="space-y-5 sm:space-y-6 md:space-y-8">
-      {/* Description */}
       <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed">
         {project.longDescription}
       </p>
 
-      {/* Tech Stack */}
       <div>
         <h4 className="text-white/60 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Technologies</h4>
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -126,7 +144,6 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
         </div>
       </div>
 
-      {/* Features */}
       <div>
         <h4 className="text-white/60 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Key Features</h4>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
@@ -145,7 +162,6 @@ const ProjectContent = memo(({ project }: { project: Project }) => {
         </ul>
       </div>
 
-      {/* Links */}
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
         <motion.a
           href={project.link}
@@ -214,7 +230,6 @@ const Projects = memo(() => {
               viewport={{ once: true }}
               className="group relative bg-[#0a0a0a] rounded-2xl overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 hover:-translate-y-1"
             >
-              {/* Project Cover Image */}
               <a href={project.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[16/10] overflow-hidden cursor-pointer">
                 <img 
                   src={project.image} 
@@ -222,16 +237,13 @@ const Projects = memo(() => {
                   loading="lazy"
                   className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                {/* Subtle bottom fade into card body */}
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
               </a>
 
-              {/* Card Body */}
               <div className="p-6 md:p-8 space-y-4">
-                {/* Meta row */}
                 <div className="flex items-center justify-between">
                   <span className="font-space-mono text-[10px] text-zinc-500 uppercase tracking-[0.15em]">
-                    {project.year} — {project.role}
+                    {project.year} {project.role}
                   </span>
                   <div className="flex gap-3">
                     <a 
@@ -253,18 +265,24 @@ const Projects = memo(() => {
                   </div>
                 </div>
 
-                {/* Title */}
                 <h3 className="text-2xl md:text-3xl font-bold text-white font-formula-condensed uppercase tracking-wider group-hover:text-[#ea580c] transition-colors duration-400">
                   {project.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-zinc-400 font-outfit text-sm leading-relaxed line-clamp-2">
                   {project.description}
                 </p>
 
-                {/* Tech pills */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
+                <ul className="flex flex-col gap-1.5 pt-2 pb-2">
+                  {project.metrics?.map((metric, i) => (
+                    <li key={i} className="flex items-center gap-2 text-[11px] font-space-mono text-zinc-300 uppercase tracking-wider">
+                      <span className="w-1 h-1 rounded-full bg-[#ea580c] flex-shrink-0 opacity-80" />
+                      {metric}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {project.tech.map(t => (
                     <span key={t} className="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] text-[10px] font-space-mono text-zinc-500 uppercase tracking-wider rounded-full">
                       {t}

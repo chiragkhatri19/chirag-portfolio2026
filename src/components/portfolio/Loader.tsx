@@ -59,7 +59,6 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
             <span>{line.text}</span>
           </div>
         ))}
-        {/* Blinking Terminal Cursor */}
         <div className="flex gap-2 text-zinc-300 mt-2">
            {activeLines.length >= 1 && activeLines.length < SEQUENCE.length && (
               <span className="text-zinc-500">{">"}</span>

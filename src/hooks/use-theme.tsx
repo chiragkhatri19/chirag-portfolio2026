@@ -30,7 +30,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     return mode;
   });
 
-  // Update resolved theme when mode changes or system preference changes
   useEffect(() => {
     const updateResolvedTheme = () => {
       if (mode === "system") {
@@ -42,7 +41,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     updateResolvedTheme();
 
-    // Listen for system theme changes
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = () => {
       if (mode === "system") {
@@ -54,7 +52,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [mode]);
 
-  // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light", "dark");

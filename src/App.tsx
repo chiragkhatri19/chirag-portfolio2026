@@ -23,7 +23,6 @@ function App() {
           {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
         </AnimatePresence>
         
-        {/* Render portfolio continuously so assets load in background */}
         <div key="portfolio" className={loading ? "h-screen overflow-hidden" : ""}>
           <ApplePillNavbar />
           <main style={{
@@ -33,7 +32,6 @@ function App() {
             minHeight: "100vh",
             overflow: "hidden"
           }}>
-            {/* Fine Noise Overlay */}
             <div style={{
               position: "fixed",
               top: 0,

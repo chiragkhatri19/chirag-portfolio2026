@@ -13,12 +13,10 @@ const Footer = memo(() => {
 
   return (
     <footer className="pt-20 pb-12 bg-transparent relative">
-      {/* Top divider */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px]">
         <div className="w-full h-[1px] bg-white/5 mb-16" />
         
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-          {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <span className="text-3xl font-black font-outfit">
@@ -31,7 +29,6 @@ const Footer = memo(() => {
             </p>
           </div>
 
-          {/* Links */}
           <div className="flex gap-8 md:gap-10">
             {SOCIAL_LINKS.map((social) => (
               <a 
@@ -48,7 +45,6 @@ const Footer = memo(() => {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-space-mono text-[10px] text-zinc-700 uppercase tracking-[0.2em]">
             © {currentYear} Chirag Khatri. All rights reserved.
