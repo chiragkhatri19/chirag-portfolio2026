@@ -1,6 +1,7 @@
 import { memo, useEffect } from "react";
 import "@/fonts.css";
 import { Spotlight } from "@/components/ui/spotlight";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const Hero = memo(() => {
   useEffect(() => {
@@ -201,7 +202,7 @@ const Hero = memo(() => {
 
       <div className="bio-zone grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 px-6 md:px-[60px] pb-20 max-w-[1200px] mx-auto items-start relative z-10 transition-all duration-700">
         <div className="lg:mt-[130px] text-left">
-          <p className="bio-statement text-4xl sm:text-5xl md:text-8xl font-black leading-[1.05] md:leading-[0.95] tracking-[0.02em] uppercase text-white font-formula-condensed" style={{ textShadow: "0 0 40px rgba(234,88,12,0.15), 0 0 80px rgba(234,88,12,0.08), 0 4px 12px rgba(0,0,0,0.5)" }}>
+          <p className="bio-statement text-[42px] sm:text-5xl md:text-8xl font-black leading-[1.1] sm:leading-[1.05] md:leading-[0.95] tracking-[0.02em] uppercase text-white font-formula-condensed" style={{ textShadow: "0 0 40px rgba(234,88,12,0.15), 0 0 80px rgba(234,88,12,0.08), 0 4px 12px rgba(0,0,0,0.5)" }}>
             HI! I'M <span className="text-[#ea580c]">CHIRAG</span>,
             <br />
             I LOVE MAKING THINGS
@@ -210,9 +211,9 @@ const Hero = memo(() => {
           </p>
         </div>
 
-        <div className="max-w-[480px] lg:mt-[120px] text-left">
+        <div className="max-w-[480px] lg:mt-[160px] text-left">
           <p className="text-[15px] md:text-[16px] leading-[1.8] text-white/70 mb-8 font-mono tracking-tight" style={{ textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)" }}>
-            i'm a cs student who loves building things that actually get used. i spend most of my time shipping full-stack apps, experimenting with AI workflows to move faster, and figuring out how to make stuff that doesn't suck. still learning, still breaking things but that's kinda the point.
+            i'm a cs student who loves <Highlighter action="underline" color="#ea580c" strokeWidth={2}>building things that actually get used</Highlighter>. i spend most of my time shipping full-stack apps, experimenting with AI workflows to move faster, and figuring out how to make stuff that doesn't suck. still learning, still breaking things but that's kinda the point.
           </p>
 
           <div className="mt-10 group">

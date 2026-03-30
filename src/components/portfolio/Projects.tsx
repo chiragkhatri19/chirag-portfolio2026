@@ -1,12 +1,13 @@
 import { ExternalLink, Github } from "lucide-react";
 import { motion } from "framer-motion";
 import { memo } from "react";
+import { Highlighter } from "@/components/ui/highlighter";
 
 
 export type Project = {
   id: string;
   title: string;
-  description: string;
+  description: React.ReactNode;
   longDescription: string;
   tech: string[];
   link: string;
@@ -15,7 +16,7 @@ export type Project = {
   year: string;
   role: string;
   features: string[];
-  metrics: string[];
+  metrics: React.ReactNode[];
 };
 
 export const projects: Project[] = [
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     metrics: [
       "Built During a Weekend Hackathon",
       "Solves Context-less AI Translations",
-      "Published CLI to NPM Registry"
+      <>Published CLI to <Highlighter action="highlight" color="#ea580c"><span className="text-black font-bold px-1">NPM Registry</span></Highlighter></>
     ],
   },
   {
@@ -66,7 +67,7 @@ export const projects: Project[] = [
     metrics: [
       "Built to Solve Personal Gym Needs",
       "Validated by 160+ Early Testers",
-      "Scaled to 300+ Organic Users"
+      <>Scaled to <Highlighter action="circle" color="#ea580c" padding={2}>300+ Organic Users</Highlighter></>
     ],
   },
   {
@@ -90,7 +91,7 @@ export const projects: Project[] = [
     ],
     metrics: [
       "Built for Smart India Hackathon",
-      "Selected at College Qualifiers",
+      <>Selected at <Highlighter action="underline" color="#ea580c" strokeWidth={1}>College Qualifiers</Highlighter></>,
       "Engineered AI Matching Logic"
     ],
   },
@@ -117,7 +118,7 @@ export const projects: Project[] = [
     metrics: [
       "Generates ATS-Compliant Resumes",
       "Optimized for Standard Parsers",
-      "Generated 250+ Resumes to Date"
+      <>Generated <Highlighter action="circle" color="#ea580c" padding={2}>250+ Resumes</Highlighter> to Date</>
     ],
   },
 ];
@@ -213,11 +214,12 @@ const Projects = memo(() => {
       }} />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
-        <div className="flex flex-col mb-16">
+        <div className="flex flex-col mb-16 items-start">
           <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
-            PROJECTS
+            <Highlighter action="underline" color="#ea580c" strokeWidth={5} padding={8}>
+              PROJECTS
+            </Highlighter>
           </h2>
-          <div className="h-1 w-12 bg-[#ea580c] mt-4" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative">

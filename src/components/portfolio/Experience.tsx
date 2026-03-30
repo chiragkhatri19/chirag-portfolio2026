@@ -1,44 +1,45 @@
 import { motion } from "framer-motion";
 import { memo } from "react";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const EXPERIENCES = [
   {
     role: "Full Stack Developer",
     company: "Open Source / Freelance",
     period: "2024 - PRESENT",
-    description: "Architecting high-performance web applications with technical precision and intuitive UX. Focused on building context-aware tools and scalable AI-driven platforms.",
+    description: "Architecting autonomous agents and high-performance web applications by integrating modern frontend frameworks with robust AI pipelines.",
     highlights: [
-      "Built GLOS.io a UI-context-aware localization engine for developers",
-      "Developed FitLama an AI fitness coach using schema-driven LLM pipelines",
-      "Created Resumate an ATS-optimized resume builder with 10k+ potential users",
-      "Deployed automated scraping systems using Playwright and Vision AI models",
+      "Engineered GLOS.io, an open-source UI-context-aware localization tool driven by Next.js, Playwright, and Vision LLMs.",
+      "Developed FitLama, an AI fitness coach utilizing schema-driven LLM pipelines to generate personalized, real-time workout plans.",
+      <>Scaled ResuMATE, an ATS-compliant resume builder, to capture <Highlighter action="circle" color="#ea580c" padding={4}>10k+ potential users</Highlighter></>,
+      "Designed and deployed an intelligent job matching engine (Worksea) with Clerk, Supabase, and React, recognized at college-level qualifiers.",
     ],
   },
   {
     role: "Marketing Intern",
     company: "Monster Energy",
     period: "2023 - 2024",
-    description: "Managed brand activations and digital community growth through strategic marketing initiatives and youth engagement programs.",
+    description: "Spearheaded on-ground brand activations and grassroots digital community growth through data-driven marketing and audience engagement.",
     highlights: [
-      "Led digital marketing campaigns across university networks and social channels",
-      "Coordinated 10+ high-impact promotional events with 5k+ total attendance",
-      "Analyzed engagement metrics to optimize campaign reach and conversion rates",
-      "Developed creative content strategies to enhance brand presence in Gen-Z markets",
+      "Led digital marketing campaigns and brand ambassador programs across targeted university networks.",
+      <>Coordinated 10+ high-impact promotional events, drawing <Highlighter action="underline" color="#ea580c" strokeWidth={2}>5k+ total attendees</Highlighter></>,
+      "Analyzed local market engagement metrics to optimize campaign reach and continuously improve conversion rates.",
+      "Orchestrated creative content strategies to aggressively expand market penetration within key Gen-Z demographics.",
     ],
   },
   {
     role: "Web Dev & Video Editor",
     company: "Freelance",
     period: "2022 - 2023",
-    description: "Delivered high-quality digital assets and responsive web interfaces for various clients and creative agencies.",
+    description: "Delivered conversion-focused digital assets and responsive web interfaces, blending technical execution with compelling visual storytelling.",
     highlights: [
-      "Engineered 20+ responsive landing pages with high conversion performance",
-      "Edited 50+ long-form and short-form video assets for digital creators",
-      "Mastered Adobe Creative Suite and modern frontend frameworks simultaneously",
-      "Consulted on UI/UX improvements for early-stage startup prototypes",
+      <>Engineered 20+ responsive landing pages optimized for <Highlighter action="underline" color="#ea580c" strokeWidth={2}>high conversion</Highlighter> and accessibility.</>,
+      "Produced and edited 50+ long-form and short-form video assets, driving strong organic reach for digital creators.",
+      "Bridged the gap between design and development by utilizing both the Adobe Creative Suite and modern JavaScript frameworks.",
+      "Consulted with early-stage startups to rapidly prototype, iterate, and refine core UI/UX flows.",
     ],
   },
-] as const;
+];
 
 const seededRandom = (seed: number, i: number) =>
   ((seed * (i + 1) * 9301 + 49297) % 233280) / 233280;
@@ -64,11 +65,12 @@ const Experience = memo(() => {
       }} />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
-        <div className="flex flex-col mb-16">
+        <div className="flex flex-col mb-16 items-start">
           <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
-            EXPERIENCE
+            <Highlighter action="underline" color="#ea580c" strokeWidth={5} padding={8}>
+              EXPERIENCE
+            </Highlighter>
           </h2>
-          <div className="h-1 w-12 bg-[#ea580c] mt-4" />
         </div>
 
         <div className="relative">
@@ -112,7 +114,7 @@ const Experience = memo(() => {
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 pt-4 border-t border-white/5">
-                      {(exp.highlights as unknown as string[]).map((highlight, hIdx) => (
+                      {exp.highlights.map((highlight, hIdx) => (
                         <div key={hIdx} className="flex items-start gap-3">
                           <span className="w-1 h-1 bg-zinc-700 rounded-full mt-2 group-hover:bg-primary transition-colors" />
                           <span className="text-[13px] font-outfit text-zinc-500 leading-snug">

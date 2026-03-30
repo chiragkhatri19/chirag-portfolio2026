@@ -109,9 +109,8 @@ const Skills = memo(() => {
                 className="group relative cursor-pointer px-1 md:px-3 flex flex-col items-center"
               >
                 <Icon 
-                   size={52} 
+                  className="w-[32px] h-[32px] sm:w-[42px] sm:h-[42px] md:w-[52px] md:h-[52px] drop-shadow-[0_0_12px_rgba(0,0,0,0.6)] opacity-90 group-hover:opacity-100 transition-opacity"
                   style={{ color: item.color }} 
-                  className="drop-shadow-[0_0_12px_rgba(0,0,0,0.6)] opacity-90 group-hover:opacity-100 transition-opacity"
                 />
                 <span className="absolute -bottom-8 text-[9px] font-space-mono text-zinc-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
                   {item.name}

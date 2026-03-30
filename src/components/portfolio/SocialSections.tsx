@@ -2,12 +2,17 @@ import { motion } from "framer-motion";
 import { Github, Twitter, Star, ArrowUpRight } from "lucide-react";
 import TweetCard from "@/components/ui/tweet-card";
 import { cn } from "@/lib/utils";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const GitHubSection = () => {
   return (
     <section id="github" className="py-24 px-6 relative max-w-[1100px] mx-auto overflow-hidden">
       <div className="flex items-center gap-6 mb-16">
-        <h2 className="text-5xl md:text-6xl font-black tracking-wider font-formula-condensed text-white uppercase">GitHub</h2>
+        <h2 className="text-5xl md:text-6xl font-black tracking-wider font-formula-condensed text-white uppercase flex-shrink-0">
+          <Highlighter action="underline" color="#ea580c" strokeWidth={5} padding={8}>
+            GitHub
+          </Highlighter>
+        </h2>
         <div className="flex-1 h-[1px] bg-white/10" />
       </div>
 
@@ -96,7 +101,11 @@ const XSection = () => {
   return (
     <section id="x" className="py-24 px-6 relative max-w-[1100px] mx-auto overflow-hidden">
       <div className="flex items-center gap-6 mb-16">
-        <h2 className="text-5xl md:text-6xl font-black tracking-wider font-formula-condensed text-white uppercase">X Feed</h2>
+        <h2 className="text-5xl md:text-6xl font-black tracking-wider font-formula-condensed text-white uppercase flex-shrink-0">
+          <Highlighter action="underline" color="#ea580c" strokeWidth={5} padding={8}>
+            X Feed
+          </Highlighter>
+        </h2>
         <div className="flex-1 h-[1px] bg-white/10" />
       </div>
 

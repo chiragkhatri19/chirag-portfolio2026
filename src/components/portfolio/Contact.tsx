@@ -86,7 +86,21 @@ const Contact = memo(() => {
 
           <div className="flex flex-col justify-between">
             <div className="space-y-6">
-              <p className="text-zinc-400 font-outfit text-lg leading-relaxed">
+              <div className="flex items-center gap-5 mb-10 group">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border border-white/10 group-hover:border-white/20 transition-all duration-500 relative flex-shrink-0">
+                  <img 
+                    src="/profile.jpg" 
+                    alt="Chirag Khatri" 
+                    className="w-full h-full object-cover scale-[1.6] transition-transform duration-500 group-hover:scale-[1.7]" 
+                  />
+                </div>
+                <div>
+                  <h4 className="text-white font-formula-condensed text-2xl md:text-3xl tracking-wider uppercase leading-none mb-2">Chirag Khatri</h4>
+                  <p className="text-zinc-500 font-space-mono text-[10px] tracking-[0.2em] uppercase leading-none">Full-Stack Dev & CS Student</p>
+                </div>
+              </div>
+
+              <p className="text-zinc-400 font-outfit text-lg leading-relaxed pt-2">
                 prefer a direct message? hit me up on any of these i usually respond within a day.
               </p>
 
