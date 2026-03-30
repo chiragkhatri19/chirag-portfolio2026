@@ -27,7 +27,7 @@ const GitHubSection = () => {
                 </div>
                 <div>
                   <div className="text-[10px] font-bold font-space-mono text-zinc-500 uppercase tracking-[0.3em] mb-1">Latest Project</div>
-                  <h3 className="text-3xl md:text-4xl font-bold font-formula-condensed text-white tracking-tight">chiragkhatri19 / <span className="text-primary italic">GLOS</span></h3>
+                  <h3 className="text-3xl md:text-4xl font-bold font-formula-condensed text-white tracking-wider">chiragkhatri19 / <span className="text-primary italic">GLOS</span></h3>
                 </div>
               </div>
               <a href="https://github.com/chiragkhatri19/GLOS" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all">
@@ -42,17 +42,17 @@ const GitHubSection = () => {
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="space-y-1">
                 <div className="text-[10px] font-bold font-space-mono text-zinc-600 uppercase tracking-[0.2em]">Repositories</div>
-                <div className="text-4xl font-formula-condensed text-white">39</div>
+                <div className="text-4xl font-formula-condensed text-white tracking-wider">39</div>
               </div>
               <div className="space-y-1">
                 <div className="text-[10px] font-bold font-space-mono text-zinc-600 uppercase tracking-[0.2em]">Stars</div>
-                <div className="text-4xl font-formula-condensed text-white flex items-center gap-2">
+                <div className="text-4xl font-formula-condensed text-white flex items-center gap-2 tracking-wider">
                   <Star className="w-6 h-6 text-primary fill-primary/20" /> 03
                 </div>
               </div>
               <div className="space-y-1 col-span-2 lg:col-span-1 border-t lg:border-t-0 border-white/5 pt-6 lg:pt-0">
                 <div className="text-[10px] font-bold font-space-mono text-zinc-600 uppercase tracking-[0.2em]">Global Status</div>
-                <div className="text-xl font-formula-condensed text-primary uppercase tracking-[0.05em]">So far so good</div>
+                 <div className="text-xl font-formula-condensed text-primary uppercase tracking-wider">So far so good</div>
               </div>
             </div>
           </div>
@@ -113,11 +113,11 @@ const XSection = () => {
           <div>
             <div className="flex justify-between items-start mb-10">
               <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center font-formula-condensed text-3xl text-white">
+                <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center font-formula-condensed text-3xl text-white tracking-wider">
                   CK
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold font-formula-condensed text-white tracking-tight uppercase">Chirag Khatri</h3>
+                  <h3 className="text-2xl font-bold font-formula-condensed text-white tracking-wider uppercase">Chirag Khatri</h3>
                   <div className="text-sm font-bold font-space-mono text-primary tracking-widest uppercase mb-1">@chiragx19</div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ const XSection = () => {
 
             <div className="space-y-6">
               <div className="text-[10px] font-bold font-space-mono text-primary uppercase tracking-[0.3em]">Profile Bio</div>
-              <h4 className="text-3xl font-bold font-formula-condensed text-white leading-[1.1] uppercase tracking-tight">Full Stack Dev // Buidler // Open Source // AI Scientist</h4>
+              <h4 className="text-3xl font-bold font-formula-condensed text-white leading-[1.1] uppercase tracking-wider">Full Stack Dev // Buidler // Open Source // AI Scientist</h4>
               <p className="text-zinc-400 font-outfit text-lg leading-relaxed font-medium">
                 Active buidler at <span className="text-white">@blockguildbpit</span>. Obsessed with high-end interfaces and functional AI architecture.
               </p>
@@ -135,11 +135,11 @@ const XSection = () => {
 
           <div className="flex gap-10 mt-10 border-t border-white/5 pt-8">
             <div className="space-y-1">
-              <div className="text-3xl md:text-4xl font-formula-condensed text-white">1,513</div>
+              <div className="text-3xl md:text-4xl font-formula-condensed text-white tracking-wider">1,513</div>
               <div className="text-[9px] font-bold font-space-mono text-zinc-600 uppercase tracking-[0.3em]">Followers</div>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl md:text-4xl font-formula-condensed text-white">784</div>
+              <div className="text-3xl md:text-4xl font-formula-condensed text-white tracking-wider">784</div>
               <div className="text-[9px] font-bold font-space-mono text-zinc-600 uppercase tracking-[0.3em]">Following</div>
             </div>
           </div>

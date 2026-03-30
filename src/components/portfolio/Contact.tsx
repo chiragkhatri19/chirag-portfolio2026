@@ -25,7 +25,7 @@ const Contact = memo(() => {
           <span className="font-space-mono text-[10px] text-zinc-500 uppercase tracking-[0.4em] mb-4 block">
             Let's Connect
           </span>
-          <h2 className="text-5xl md:text-7xl font-black text-white font-formula-condensed tracking-tighter uppercase leading-[0.95]">
+          <h2 className="text-5xl md:text-7xl font-black text-white font-formula-condensed tracking-[0.02em] uppercase leading-[0.95]">
             GOT AN IDEA?
             <br />
             <span className="text-[#ea580c]">LET'S TALK.</span>

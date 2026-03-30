@@ -19,6 +19,26 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "glos-io",
+    title: "GLOS.io",
+    description: "A UI-context-aware localization tool that eliminates 'blind' AI translations by mapping strings directly to their visual UI components.",
+    longDescription: "GLOS (Give your i18n pipeline eyes) is a developer tool designed to fix the lack of visual context in automated translation workflows. It uses a headless browser (Playwright) to capture screenshots of every route in an application and employs a Vision LLM to extract visual context for every string. By generating a context-mapped registry, it ensures that AI translations understand whether a word like 'Cancel' is an action button or a status label, significantly increasing translation accuracy and tone consistency.",
+    tech: ["TypeScript", "Next.js", "Playwright", "Vision LLM", "Turbo", "Lingo.dev"],
+    link: "https://glos.io",
+    github: "https://github.com/chiragkhatri19/GLOS",
+    image: "/project-section/glos.io.png",
+    year: "2026",
+    role: "Lead Developer & Creator",
+    features: [
+      "Automated route capture with Playwright",
+      "AI-powered UI hierarchy analysis",
+      "Context-mapped registry generation",
+      "Translation quality reporting CLI",
+      "Visual dashboard for string management",
+      "Monorepo architecture with Turborepo",
+    ],
+  },
+  {
     id: "fit-llama-ai",
     title: "Fit Llama AI",
     description: "An intelligent AI-powered fitness coach that creates personalized workout plans, tracks progress, and provides real-time guidance for achieving fitness goals.",
@@ -77,26 +97,6 @@ export const projects: Project[] = [
       "PDF generation and download",
       "Customizable design options",
       "Keyword optimization recommendations",
-    ],
-  },
-  {
-    id: "glos-io",
-    title: "GLOS.io",
-    description: "A UI-context-aware localization tool that eliminates 'blind' AI translations by mapping strings directly to their visual UI components.",
-    longDescription: "GLOS (Give your i18n pipeline eyes) is a developer tool designed to fix the lack of visual context in automated translation workflows. It uses a headless browser (Playwright) to capture screenshots of every route in an application and employs a Vision LLM to extract visual context for every string. By generating a context-mapped registry, it ensures that AI translations understand whether a word like 'Cancel' is an action button or a status label, significantly increasing translation accuracy and tone consistency.",
-    tech: ["TypeScript", "Next.js", "Playwright", "Vision LLM", "Turbo", "Lingo.dev"],
-    link: "https://glos.io",
-    github: "https://github.com/chiragkhatri19/GLOS",
-    image: "/project-section/glos.io.png",
-    year: "2026",
-    role: "Lead Developer & Creator",
-    features: [
-      "Automated route capture with Playwright",
-      "AI-powered UI hierarchy analysis",
-      "Context-mapped registry generation",
-      "Translation quality reporting CLI",
-      "Visual dashboard for string management",
-      "Monorepo architecture with Turborepo",
     ],
   },
 ];
@@ -198,7 +198,7 @@ const Projects = memo(() => {
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
         <div className="flex flex-col mb-16">
-          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-tight uppercase">
+          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
             PROJECTS
           </h2>
           <div className="h-1 w-12 bg-[#ea580c] mt-4" />
@@ -254,7 +254,7 @@ const Projects = memo(() => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-white font-formula-condensed uppercase tracking-tight group-hover:text-[#ea580c] transition-colors duration-400">
+                <h3 className="text-2xl md:text-3xl font-bold text-white font-formula-condensed uppercase tracking-wider group-hover:text-[#ea580c] transition-colors duration-400">
                   {project.title}
                 </h3>
 

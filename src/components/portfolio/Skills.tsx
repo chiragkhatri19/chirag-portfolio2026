@@ -98,7 +98,7 @@ const Skills = memo(() => {
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px]">
         {/* Simplified Header */}
         <div className="flex flex-col mb-16">
-          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-tight uppercase">
+          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
             STACK
           </h2>
           <div className="h-1 w-12 bg-[#ea580c] mt-4" />

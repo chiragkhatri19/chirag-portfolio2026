@@ -105,7 +105,7 @@ const Hero = memo(() => {
           fontSize: "90px",
           fontWeight: 700,
           lineHeight: 1,
-          letterSpacing: "0.01em",
+          letterSpacing: "0.05em",
           color: "#FFFFFF",
           textTransform: "uppercase",
           margin: 0,
@@ -216,7 +216,7 @@ const Hero = memo(() => {
       <div className="bio-zone grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 px-6 md:px-[60px] pb-20 max-w-[1200px] mx-auto items-start relative z-10 transition-all duration-700">
         {/* Left: Bold Statement */}
         <div className="lg:mt-[130px] text-left">
-          <p className="bio-statement text-4xl sm:text-5xl md:text-8xl font-black leading-[1.05] md:leading-[0.95] tracking-tighter uppercase text-white font-formula-condensed" style={{ textShadow: "0 0 40px rgba(234,88,12,0.15), 0 0 80px rgba(234,88,12,0.08), 0 4px 12px rgba(0,0,0,0.5)" }}>
+          <p className="bio-statement text-4xl sm:text-5xl md:text-8xl font-black leading-[1.05] md:leading-[0.95] tracking-[0.02em] uppercase text-white font-formula-condensed" style={{ textShadow: "0 0 40px rgba(234,88,12,0.15), 0 0 80px rgba(234,88,12,0.08), 0 4px 12px rgba(0,0,0,0.5)" }}>
             HI! I'M <span className="text-[#ea580c]">CHIRAG</span>,
             <br />
             I LOVE MAKING THINGS

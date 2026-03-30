@@ -69,7 +69,7 @@ const Experience = memo(() => {
       <div className="max-w-[1200px] mx-auto px-6 md:px-[60px] relative z-10">
         {/* Simplified Header - Hero Matching */}
         <div className="flex flex-col mb-16">
-          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-tight uppercase">
+          <h2 className="text-5xl font-bold text-white font-formula-condensed tracking-wider uppercase">
             EXPERIENCE
           </h2>
           <div className="h-1 w-12 bg-[#ea580c] mt-4" />
@@ -106,7 +106,7 @@ const Experience = memo(() => {
 
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-4xl font-bold text-white font-formula-condensed uppercase tracking-tight group-hover:text-[#ea580c] transition-colors duration-500">
+                      <h3 className="text-4xl font-bold text-white font-formula-condensed uppercase tracking-wider group-hover:text-[#ea580c] transition-colors duration-500">
                         {exp.role}
                       </h3>
                       <p className="font-space-mono text-[14px] text-zinc-400 mt-2">
