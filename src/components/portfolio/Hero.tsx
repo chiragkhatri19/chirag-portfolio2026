@@ -44,9 +44,9 @@ const Hero = memo(() => {
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <defs>
           <radialGradient id="spotlightGradient" cx="50%" cy="50%" r="65%">
-            <stop offset="0%" stopColor="rgba(59, 130, 246, 1)" />
-            <stop offset="50%" stopColor="rgba(59, 130, 246, 0)" />
-            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+            <stop offset="0%" stopColor="rgba(96, 165, 250, 1)" />
+            <stop offset="50%" stopColor="rgba(96, 165, 250, 0)" />
+            <stop offset="100%" stopColor="rgba(96, 165, 250, 0)" />
           </radialGradient>
         </defs>
       </svg>
@@ -56,8 +56,8 @@ const Hero = memo(() => {
         position: "absolute",
         inset: 0,
         backgroundImage: `
-          linear-gradient(to right, rgba(80, 80, 90, 0.08) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(80, 80, 90, 0.08) 1px, transparent 1px)
+          linear-gradient(to right, rgba(96, 165, 250, 0.1) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(96, 165, 250, 0.1) 1px, transparent 1px)
         `,
         backgroundSize: "80px 80px",
         maskImage: "radial-gradient(circle at 50% 20%, black 0%, black 25%, transparent 45%)",
@@ -70,7 +70,7 @@ const Hero = memo(() => {
       <div style={{
         position: "absolute",
         inset: 0,
-        background: "radial-gradient(circle at 50% 20%, rgba(35, 40, 50, 0.2) 0%, rgba(25, 30, 40, 0.15) 35%, transparent 60%)",
+        background: "radial-gradient(circle at 50% 20%, rgba(30, 58, 138, 0.3) 0%, rgba(15, 23, 42, 0.1) 40%, transparent 70%)",
         pointerEvents: "none",
         zIndex: 1
       }} />
