@@ -1,30 +1,40 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const SEQUENCE = [
+  { text: "> ssh guest@chiragships.site", delay: 400 },
+  { text: "requesting access...", delay: 200, isSystem: true },
+  { text: "access granted. [OK]", delay: 300, isSystem: true },
+  { text: "> ./init_workspace.sh", delay: 500 },
+  { text: "fetching modules... [OK]", delay: 200, isSystem: true },
+  { text: "compiling interface... [OK]", delay: 200, isSystem: true },
+  { text: "system status: ONLINE", delay: 400, isSystem: true, highlight: true }
+];
+
 export const Loader = ({ onComplete }: { onComplete: () => void }) => {
-  const [progress, setProgress] = useState(0);
+  const [activeLines, setActiveLines] = useState<number>(0);
 
   useEffect(() => {
-    // Fast simulated progress to reach 100% in ~2-2.5s
-    const duration = 2200; // 2.2 seconds
-    const interval = 20; // 20ms steps for smooth animation
-    const steps = duration / interval;
-    const increment = 100 / steps;
+    let timeoutId: NodeJS.Timeout;
+    let currentIndex = 0;
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(() => onComplete(), 300); // Hold at 100% shortly before fading out
-          return 100;
-        }
-        // Add tiny bit of noise/variation to the progress for realism
-        const variation = (Math.random() * 0.5) * increment;
-        return Math.min(100, prev + increment + variation);
-      });
-    }, interval);
+    const runSequence = () => {
+      if (currentIndex < SEQUENCE.length) {
+        setActiveLines(currentIndex + 1);
+        timeoutId = setTimeout(runSequence, SEQUENCE[currentIndex].delay);
+        currentIndex++;
+      } else {
+        // Complete sequence, hold for a moment then trigger unmount
+        timeoutId = setTimeout(() => {
+          onComplete();
+        }, 400); 
+      }
+    };
 
-    return () => clearInterval(timer);
+    // Initial small delay before starting
+    timeoutId = setTimeout(runSequence, 200);
+
+    return () => clearTimeout(timeoutId);
   }, [onComplete]);
 
   return (
@@ -32,65 +42,31 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ 
         opacity: 0, 
-        y: -40, // Slide up slightly upon exit
-        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+        transition: { duration: 0.4, ease: "easeOut" } 
       }}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
+      className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center p-6 sm:p-12 selection:bg-[#ea580c] selection:text-white"
     >
-      {/* Grid Pattern Background - matching Hero aesthetic */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        backgroundImage: `
-          linear-gradient(to right, rgba(80, 80, 90, 0.08) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(80, 80, 90, 0.08) 1px, transparent 1px)
-        `,
-        backgroundSize: "80px 80px",
-        pointerEvents: "none",
-        zIndex: 0
-      }} />
-
-      {/* Center content */}
-      <div className="relative z-10 w-full max-w-[420px] px-8 flex flex-col gap-6">
-        
-        {/* Top Info */}
-        <div className="flex justify-between items-end">
-          <div className="font-space-mono text-[10px] sm:text-xs text-zinc-500 uppercase tracking-[0.25em] flex flex-col gap-1">
-            <span className="text-white/80">[ SYSTEM INITIALIZATION ]</span>
-            <span className="text-zinc-600 tracking-[0.3em]">CHIRAG_KHATRI</span>
+      <div className="w-full max-w-[500px] font-space-mono text-xs sm:text-sm md:text-base text-left">
+        {SEQUENCE.slice(0, activeLines).map((line, idx) => (
+          <div 
+            key={idx} 
+            className={`mb-2 md:mb-3 leading-relaxed ${
+              line.highlight 
+                ? "text-[#ea580c]" 
+                : line.isSystem 
+                  ? "text-zinc-500" 
+                  : "text-zinc-200"
+            }`}
+          >
+            {line.text}
           </div>
-          <div className="font-formula-condensed text-5xl sm:text-6xl text-white tracking-wider flex items-baseline leading-none">
-            {Math.min(100, Math.floor(progress)).toString().padStart(3, "0")}
-            <span className="text-[#ea580c] text-xl sm:text-2xl ml-1 tracking-normal">%</span>
-          </div>
-        </div>
-
-        {/* Outer Progress Bar Container */}
-        <div className="h-[2px] w-full bg-white/[0.05] relative overflow-hidden flex items-center">
-          {/* Inner Animated Bar */}
-          <motion.div
-            className="absolute left-0 top-0 bottom-0 bg-[#ea580c] shadow-[0_0_15px_rgba(234,88,12,0.8)]"
-            initial={{ width: "0%" }}
-            animate={{ width: `${progress}%` }}
-            transition={{ ease: "linear", duration: 0.02 }}
-          />
-        </div>
-
-        {/* Status Messages */}
-        <div className="flex justify-between font-space-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">
-          <span className="text-[#ea580c]">
-            {progress < 25 
-              ? "BOOTING KERNEL..." 
-              : progress < 60 
-                ? "LOADING ASSETS..." 
-                : progress < 90 
-                  ? "COMPILING REALITY..." 
-                  : "READY."}
-          </span>
-          <span className="text-zinc-600 border border-zinc-800 px-1.5 py-[1px] rounded-[2px] bg-black/20">
-            {progress < 100 ? "PROCESSING" : "LAUNCH"}
-          </span>
-        </div>
+        ))}
+        {/* Blinking Terminal Cursor */}
+        <motion.div
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+          className="inline-block w-2.5 h-4 sm:h-5 bg-white align-middle"
+        />
       </div>
     </motion.div>
   );
