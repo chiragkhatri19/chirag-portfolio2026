@@ -1,49 +1,63 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const getTimestamp = () => {
-  const d = new Date();
-  return `[${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}.${d.getMilliseconds().toString().padStart(3, '0')}]`;
-};
-
-const SEQUENCE = [
-  { text: "ssh guest@chiragships.site", isCommand: true, delay: 400 },
-  { text: "requesting public key authentication...", delay: 200, isSystem: true },
-  { text: "access granted. session established.", delay: 300, isSystem: true },
-  { text: "mounting portfolio_workspace_v2", delay: 200, isSystem: true },
-  { text: "fetching modules... [==========] 100%", delay: 300, isSystem: true },
-  { text: "compiling interface components... OK", delay: 300, isSystem: true },
-  { text: "establishing secure connection port 443...", delay: 200, isSystem: true },
-  { text: "CHIRAG_KHATRI // SYSTEM ONLINE", delay: 400, isSystem: true, highlight: true }
+const SYSTEMD_LOGS = [
+  { text: "Starting systemd-udevd version 255-1-arch...", delay: 40 },
+  { status: "OK", text: "Mounted /boot/efi.", delay: 40 },
+  { status: "OK", text: "Reached target Local File Systems.", delay: 40 },
+  { text: "Starting Network Time Synchronization...", delay: 40 },
+  { status: "OK", text: "Started Network Time Synchronization.", delay: 40 },
+  { text: "Starting D-Bus System Message Bus...", delay: 30 },
+  { status: "OK", text: "Started D-Bus System Message Bus.", delay: 40 },
+  { text: "Starting Network Manager...", delay: 60 },
+  { status: "OK", text: "Started Network Manager.", delay: 50 },
+  { status: "OK", text: "Reached target Network.", delay: 30 },
+  { text: "Starting Authorization Manager...", delay: 40 },
+  { status: "OK", text: "Started Authorization Manager.", delay: 40 },
+  { text: "Starting Login Service...", delay: 50 },
+  { status: "OK", text: "Started Login Service.", delay: 50 },
+  { text: "Starting chirag_portfolio.service...", delay: 100 },
+  { status: "OK", text: "Started chirag_portfolio.service.", delay: 200 },
+  { status: "OK", text: "Reached target Graphical Interface.", delay: 100 },
 ];
 
 export const Loader = ({ onComplete }: { onComplete: () => void }) => {
-  const [activeLines, setActiveLines] = useState<{text: string, highlight: boolean, isCommand: boolean}[]>([]);
+  const [logs, setLogs] = useState<{status?: string, text: string}[]>([]);
+  const [showLogin, setShowLogin] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     let currentIndex = 0;
 
-    const runSequence = () => {
-      if (currentIndex < SEQUENCE.length) {
-        const item = SEQUENCE[currentIndex];
-        const lineText = item.isCommand 
-          ? `> ${item.text}`
-          : `${getTimestamp()} ${item.text}`;
-          
-        setActiveLines(prev => [...prev, { text: lineText, highlight: item.highlight || false, isCommand: item.isCommand || false }]);
-        timeoutId = setTimeout(runSequence, item.delay);
+    const runLogs = () => {
+      if (currentIndex < SYSTEMD_LOGS.length) {
+        const log = SYSTEMD_LOGS[currentIndex];
+        setLogs(prev => [...prev, log]);
+        
+        // Auto-scroll to bottom of logs
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        timeoutId = setTimeout(runLogs, log.delay);
         currentIndex++;
       } else {
-        // Complete sequence, hold for a moment then trigger unmount
+        // Clear logs and show the TTY1 login prompt
         timeoutId = setTimeout(() => {
-          onComplete();
-        }, 500); 
+          setLogs([]);
+          setShowLogin(true);
+          
+          // Finish after showing login prompt briefly
+          setTimeout(() => {
+            onComplete();
+          }, 1400); // Wait 1.4s allowing the user to read the login prompt
+        }, 200); 
       }
     };
 
-    // Initial small delay before starting
-    timeoutId = setTimeout(runSequence, 300);
+    // Initial small delay before starting the systemd logs
+    timeoutId = setTimeout(runLogs, 200);
 
     return () => clearTimeout(timeoutId);
   }, [onComplete]);
@@ -53,31 +67,54 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ 
         opacity: 0, 
-        transition: { duration: 0.6, ease: "easeInOut" } 
+        transition: { duration: 0.5, ease: "easeOut" } 
       }}
-      className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center p-6 sm:p-12 selection:bg-[#ea580c] selection:text-white"
+      className="fixed inset-0 z-[9999] bg-[#000000] flex items-start justify-start p-4 sm:p-6 overflow-hidden selection:bg-[#ea580c] selection:text-white"
     >
-      <div className="w-full max-w-[650px] font-space-mono text-[11px] sm:text-[13px] md:text-sm text-left">
-        {activeLines.map((line, idx) => (
-          <div 
-            key={idx} 
-            className={`mb-2 md:mb-3 leading-relaxed ${
-              line.highlight 
-                ? "text-[#ea580c] drop-shadow-[0_0_8px_rgba(234,88,12,0.8)]" 
-                : line.isCommand 
-                  ? "text-zinc-200" 
-                  : "text-zinc-500"
-            }`}
-          >
-            {line.text}
+      <div className="w-full font-space-mono text-[12px] sm:text-[14px] md:text-[15px] text-left text-white tracking-tight leading-tight md:leading-snug">
+        
+        {/* SystemD Logs */}
+        {!showLogin && logs.map((log, idx) => (
+          <div key={idx} className="flex gap-3 sm:gap-4 mb-0.5">
+            {/* SystemD Status Brackets */}
+            <div className="shrink-0 w-[60px] sm:w-[70px] font-normal flex justify-between">
+              <span>[</span>
+              <span className={log.status === "OK" ? "text-[#32cd32] font-bold" : "text-red-500 font-bold"}>
+                {log.status === "OK" ? "  OK  " : "      "}
+              </span> 
+              <span>]</span>
+            </div>
+            {/* Log Text */}
+            <div className="font-normal text-[#d3d3d3]">{log.text}</div>
           </div>
         ))}
-        {/* Blinking Terminal Cursor */}
-        <motion.div
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-          className="inline-block w-2.5 h-4 sm:h-5 bg-white align-middle mt-1"
-        />
+        
+        <div ref={messagesEndRef} />
+
+        {/* Arch Linux TTY1 Login Prompt Screen */}
+        {showLogin && (
+          <div className="flex flex-col gap-1 font-normal text-[#d3d3d3]">
+            <div className="mb-2 text-white">Arch Linux 6.8.9-arch1-1 (tty1)</div>
+            <div className="flex items-center gap-2">
+              <span>chiragships login:</span>
+              <span className="text-white">guest</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>Password:</span>
+              <span className="text-white">********</span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-[#32cd32] font-bold">guest@chiragships</span>
+              <span className="text-white">~ $</span>
+              <span className="text-white ml-1">./start_portfolio.sh</span>
+              <motion.div
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.4, repeat: Infinity, ease: "linear" }}
+                className="inline-block w-2.5 h-4 sm:h-5 bg-white align-middle"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
