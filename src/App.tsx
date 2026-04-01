@@ -1,4 +1,5 @@
 import { memo, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence } from "framer-motion";
 
 import ApplePillNavbar from "./components/portfolio/ApplePillNavbar";
@@ -54,6 +55,7 @@ function App() {
           </main>
         </div>
       </ThemeProvider>
+      <Analytics />
     </BrowserRouter>
   );
 }
